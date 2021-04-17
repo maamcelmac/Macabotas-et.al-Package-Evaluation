@@ -1,0 +1,109 @@
+$paddings: 12;
+
+.m-0 {
+	margin: 0;
+}
+
+.p-0 {
+	padding: 0;
+}
+.p-half {
+	padding: 0.5rem;
+}
+@for $i from 1 through $paddings {
+	.p-#{$i} {
+		padding: #{$i}rem;
+	}
+	.pb-#{$i} {
+		padding-bottom: #{$i}rem;
+	}
+
+	.pt-#{$i} {
+		padding-top: #{$i}rem;
+	}
+
+	.pl-#{$i} {
+		padding-left: #{$i}rem;
+	}
+
+	.pr-#{$i} {
+		padding-right: #{$i}rem;
+	}
+}
+
+@include query(tab-port) {
+	.p-1 {
+		padding: 0.5rem;
+	}
+
+	.p-2 {
+		padding: 1rem;
+	}
+	.p-3 {
+		padding: 1.5rem;
+	}
+}
+
+$margins: 10;
+
+@for $i from 1 through $margins {
+	.m-#{$i} {
+		margin: #{$i}rem;
+	}
+
+	.mb-#{$i} {
+		margin-bottom: #{$i}rem;
+	}
+
+	.mt-#{$i} {
+		margin-top: #{$i}rem;
+	}
+
+	.ml-#{$i} {
+		margin-left: #{$i}rem;
+	}
+
+	.mr-#{$i} {
+		margin-right: #{$i}rem;
+	}
+}
+
+.m-half {
+	margin: 0.5rem;
+}
+.mb-half {
+	margin-bottom: 0.5rem;
+}
+.mt-half {
+	margin-top: 0.5rem;
+}
+.mr-half {
+	margin-right: 0.5rem;
+}
+.ml-half {
+	margin-left: 0.5rem;
+}
+
+.width-100 {
+	width: 100%;
+}
+
+$fonts: 10;
+
+@for $i from 1 through $fonts {
+	.font-#{$i} {
+		font-size: #{$i}em;
+
+		@include query(tab-land) {
+			font-size: calc(#{$i}em - 4px) !important;
+		}
+	}
+}
+
+$fontWeights: 10;
+
+@for $i from 1 through $fontWeights {
+	.fw-#{$i}00 {
+		font-weight: #{$i}00;
+	}
+}

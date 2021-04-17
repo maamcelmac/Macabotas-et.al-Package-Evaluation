@@ -1,0 +1,16 @@
+.admin-main-content {
+	display: flex;
+	max-width: 100vw;
+	max-height: 100vh;
+	height: 100vh;
+	overflow: auto;
+
+	.main-content {
+		background: rgb(240, 240, 240);
+		padding: 1rem;
+	}
+
+	.main-sidebar {
+		width: 300px;
+	}
+}
