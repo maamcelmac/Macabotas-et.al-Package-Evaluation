@@ -3,10 +3,12 @@ import App from "./App";
 import "antd/dist/antd.css";
 import "./sass/main.scss";
 import { BrowserRouter } from "react-router-dom";
+import axios from "axios";
+axios.defaults.baseURL = "http://localhost:5000";
+
 ReactDOM.render(
 	<BrowserRouter>
-		{" "}
-		<App />{" "}
+		<App />
 	</BrowserRouter>,
 	document.getElementById("root")
 );

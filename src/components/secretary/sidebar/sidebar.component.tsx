@@ -1,27 +1,41 @@
-import React, { useState } from "react";
+import React from "react";
 import { Menu } from "antd";
-import Logo from "../../../assets/logo.png";
+import {
+	BarChartOutlined,
+	FormOutlined,
+	UsergroupAddOutlined,
+	OrderedListOutlined,
+	CopyOutlined,
+} from "@ant-design/icons";
+import { NavLink } from "react-router-dom";
+
 const Sidebar: React.FC = () => {
-	const [collapse, setCollapse] = useState(false);
-
-	const toggleCollapsed = () => {
-		setCollapse(!collapse);
-	};
-
 	return (
 		<div className="main-sidebar">
-			<div className="logo-container">
-				<img src={Logo} alt="Logo" width="75" />
-			</div>
 			<Menu
 				defaultSelectedKeys={["1"]}
 				defaultOpenKeys={["sub1"]}
+				style={{ width: "250px" }}
 				mode="inline"
 				theme="dark"
 			>
-				<Menu.Item key="1">Dashboard</Menu.Item>
-				<Menu.Item key="2">Forms</Menu.Item>
-				<Menu.Item key="3">Patients</Menu.Item>
+				<Menu.Item key="1" icon={<BarChartOutlined />}>
+					<NavLink to="/admin/dashboard">Dashboard</NavLink>
+				</Menu.Item>
+				<Menu.Item key="2" icon={<FormOutlined />}>
+					<NavLink to="/admin/forms">Forms</NavLink>
+				</Menu.Item>
+				<Menu.Item key="3" icon={<UsergroupAddOutlined />}>
+					<NavLink to="/admin/patients">Patients</NavLink>
+				</Menu.Item>
+				<Menu.Item key="4" icon={<OrderedListOutlined />}>
+					<NavLink to="/admin/appointments">
+						Appointments
+					</NavLink>
+				</Menu.Item>
+				<Menu.Item key="5" icon={<CopyOutlined />}>
+					<NavLink to="/admin/reports">Reports</NavLink>
+				</Menu.Item>
 			</Menu>
 		</div>
 	);

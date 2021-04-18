@@ -1,0 +1,24 @@
+html {
+	font-size: 62.5%;
+
+	@include query(big-desktop) {
+		font-size: 75%;
+	}
+
+	@include query(laptop) {
+		font-size: 58.5%;
+	}
+
+	@include query(tab-land) {
+		font-size: 52.5%;
+		color: red;
+	}
+
+	@include query(tab-port) {
+		font-size: 48.5%;
+	}
+
+	@include query(mobile) {
+		font-size: 45%;
+	}
+}
