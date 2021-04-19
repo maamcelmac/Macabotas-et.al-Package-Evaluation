@@ -1,20 +1,7 @@
 import React from "react";
 import { Table } from "antd";
 import { ColumnsType } from "antd/lib/table";
-
-interface Appointment {
-	fname: string;
-	mname: string;
-	lname: string;
-	address: string;
-	gender: string;
-	contactNumber: string;
-	appointmentDate: Date;
-	appointmentStatus: string;
-	brgy: string;
-	city_municipality: string;
-	province: string;
-}
+import { Appointment } from "../../../types/Interfaces";
 
 interface Props {
 	data: Appointment[];
@@ -46,8 +33,8 @@ const AppointmentTable: React.FC<Props> = ({ data }) => {
 		},
 		{
 			title: "Contact #",
-			dataIndex: "contactNumber",
-			key: "contactNumber",
+			dataIndex: "phoneNumber",
+			key: "phoneNumber",
 		},
 		{
 			title: "Appointment Date",

@@ -13,8 +13,8 @@ const ConsultationsPage = lazy(
 const PatientsPage = lazy(
 	() => import("../pages/secretary/patients/patients.page")
 );
-const AppointmentsPage = lazy(
-	() => import("../pages/secretary/appointments/appointments.page")
+const SchedulesPage = lazy(
+	() => import("../pages/secretary/schedules/schedules.page")
 );
 const ReportsPage = lazy(
 	() => import("../pages/secretary/reports/reports.page")
@@ -42,8 +42,8 @@ const SecretaryRoutes: React.FC = () => {
 							component={PatientsPage}
 						/>
 						<Route
-							path="/admin/appointments"
-							component={AppointmentsPage}
+							path="/admin/schedules"
+							component={SchedulesPage}
 						/>
 						<Route
 							path="/admin/reports"
