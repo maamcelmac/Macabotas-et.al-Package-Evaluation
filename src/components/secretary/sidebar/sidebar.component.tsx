@@ -23,7 +23,9 @@ const Sidebar: React.FC = () => {
 					<NavLink to="/admin/dashboard">Dashboard</NavLink>
 				</Menu.Item>
 				<Menu.Item key="2" icon={<FormOutlined />}>
-					<NavLink to="/admin/forms">Forms</NavLink>
+					<NavLink to="/admin/consultations">
+						Consulatations
+					</NavLink>
 				</Menu.Item>
 				<Menu.Item key="3" icon={<UsergroupAddOutlined />}>
 					<NavLink to="/admin/patients">Patients</NavLink>

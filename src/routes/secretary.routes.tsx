@@ -6,7 +6,10 @@ import Navbar from "../components/secretary/navbar/navbar.component";
 const DashboardPage = lazy(
 	() => import("../pages/secretary/dashboard/dashboard.page")
 );
-const FormsPage = lazy(() => import("../pages/secretary/forms/forms.page"));
+const ConsultationsPage = lazy(
+	() => import("../pages/secretary/consultations/consultations.page")
+);
+
 const PatientsPage = lazy(
 	() => import("../pages/secretary/patients/patients.page")
 );
@@ -31,8 +34,8 @@ const SecretaryRoutes: React.FC = () => {
 							component={DashboardPage}
 						/>
 						<Route
-							path="/admin/forms"
-							component={FormsPage}
+							path="/admin/consultations"
+							component={ConsultationsPage}
 						/>
 						<Route
 							path="/admin/patients"
