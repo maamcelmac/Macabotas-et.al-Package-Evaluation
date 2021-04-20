@@ -7,7 +7,7 @@ const Navbar: React.FC = () => {
 			<div className="logo-container">
 				<img src={Logo} alt="Logo" width="35" />
 				<p className="navbar-title">
-					Health Center Management System
+					E-Management System for Brgy Health Center
 				</p>
 			</div>
 
