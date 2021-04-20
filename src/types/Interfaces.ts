@@ -23,12 +23,8 @@ export interface PatientInfo {
 
 export interface Appointment {
 	_id: string;
-	fname: string;
-	mname: string;
-	lname: string;
-	address: string;
-	gender: string;
-	phoneNumber: string;
+	patient: PatientInfo;
+	schedule: Schedule;
 	appointmentDate: Date;
 	appointmentStatus: string;
 	brgy: string;

@@ -22,10 +22,6 @@ const CreateScheduleModal: React.FC<Props> = ({ visibility, onCancel }) => {
 		console.log(val);
 	};
 
-	const onFinishFailed = (errorInfo: any) => {
-		console.log("Failed:", errorInfo);
-	};
-
 	return (
 		<>
 			<Modal
@@ -38,12 +34,30 @@ const CreateScheduleModal: React.FC<Props> = ({ visibility, onCancel }) => {
 				onOk={() => {
 					form.submit();
 				}}
+				footer={[
+					<Button
+						htmlType="button"
+						key="cancel"
+						onClick={() => onCancel()}
+					>
+						Close
+					</Button>,
+					<Button
+						type="primary"
+						form="createScheduleForm"
+						key="submit"
+						htmlType="submit"
+					>
+						Submit
+					</Button>,
+				]}
 			>
 				<Form
 					layout="vertical"
+					form={form}
 					name="basic"
+					id="createScheduleForm"
 					onFinish={onFinish}
-					onFinishFailed={onFinishFailed}
 				>
 					<Form.Item
 						label="Consultation"
@@ -56,7 +70,29 @@ const CreateScheduleModal: React.FC<Props> = ({ visibility, onCancel }) => {
 						]}
 					>
 						<Select>
-							<Option value="1"> 1</Option>
+							<Option value="Family Planning">
+								{" "}
+								Family Planning
+							</Option>
+							<Option value="Obstetric and Gynecological">
+								{" "}
+								Obstetric and Gynecological
+							</Option>
+
+							<Option value="Individual Treatment">
+								{" "}
+								Individual Treatment
+							</Option>
+
+							<Option value="Cancer Control and Prevention Program">
+								{" "}
+								Cancer Control and Prevention Program
+							</Option>
+
+							<Option value="Nutritionist">
+								{" "}
+								Nutritionist
+							</Option>
 						</Select>
 					</Form.Item>
 
