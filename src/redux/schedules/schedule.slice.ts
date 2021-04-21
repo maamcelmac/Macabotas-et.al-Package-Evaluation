@@ -1,5 +1,8 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { add, remove, update } from "../utils";
+import axios from "axios";
+import { AppThunk } from "../store";
+import { errorCatch } from "../utils";
 export const ScheduleSlice = createSlice({
 	name: "schedules",
 	initialState: {
@@ -13,7 +16,7 @@ export const ScheduleSlice = createSlice({
 		},
 		addScheduleSuccess: (state, action) => {
 			state.loading = false;
-			state.schedules = (state.schedules, action.payload);
+			state.schedules = add(state.schedules, action.payload);
 		},
 		addScheduleError: (state, action) => {
 			state.loading = false;
@@ -21,6 +24,29 @@ export const ScheduleSlice = createSlice({
 		},
 	},
 });
+
+export const createSchedule = (
+	payload: any,
+	callback: () => void
+): AppThunk => async (dispatch) => {
+	dispatch(addScheduleStart());
+	try {
+		const req = await axios.post("/schedules", payload);
+		const res = await req.data;
+
+		if (res.success) {
+			setTimeout(() => {
+				dispatch(addScheduleSuccess(res.data));
+				callback();
+			}, 3000);
+		} else {
+			throw Error;
+		}
+	} catch (error) {
+		errorCatch(error, "Error creating schedule!");
+		dispatch(addScheduleError(error));
+	}
+};
 
 export const {
 	addScheduleStart,

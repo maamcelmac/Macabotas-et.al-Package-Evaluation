@@ -9,6 +9,11 @@ import {
 	DatePicker,
 	TimePicker,
 } from "antd";
+import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
+import { RootState } from "../../../redux/store";
+import { Schedule } from "../../../types/Interfaces";
+import { createSchedule } from "../../../redux/schedules/schedule.slice";
+import { notify } from "../../global/alerts/alerts.component";
 const { Option } = Select;
 const { TextArea } = Input;
 interface Props {
@@ -17,9 +22,19 @@ interface Props {
 }
 const CreateScheduleModal: React.FC<Props> = ({ visibility, onCancel }) => {
 	const [form] = Form.useForm();
+	const dispatch = useAppDispatch();
 
-	const onFinish = (val: any) => {
-		console.log(val);
+	const loading = useAppSelector(
+		(state: RootState) => state.schedules.loading
+	);
+	const onFinish = async (val: Schedule) => {
+		dispatch(
+			createSchedule(val, () => {
+				notify("Schedule created!", "success");
+				form.resetFields();
+				onCancel();
+			})
+		);
 	};
 
 	return (
@@ -43,6 +58,7 @@ const CreateScheduleModal: React.FC<Props> = ({ visibility, onCancel }) => {
 						Close
 					</Button>,
 					<Button
+						loading={loading}
 						type="primary"
 						form="createScheduleForm"
 						key="submit"
