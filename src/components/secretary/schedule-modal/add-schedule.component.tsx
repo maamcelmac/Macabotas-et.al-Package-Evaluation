@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import {
 	Modal,
 	Button,
@@ -69,7 +69,7 @@ const CreateScheduleModal: React.FC<Props> = ({
 					),
 			});
 		}
-	}, [currentData, editState]);
+	}, [currentData, editState, form]);
 
 	const onFinish = async (val: Schedule) => {
 		if (editState === true && currentData) {

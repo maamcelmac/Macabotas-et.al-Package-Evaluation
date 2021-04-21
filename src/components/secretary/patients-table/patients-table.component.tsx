@@ -1,13 +1,17 @@
 import React from "react";
-import { Table } from "antd";
+import { Table, Button } from "antd";
 import { PatientInfo } from "../../../types/Interfaces";
 import { ColumnsType } from "antd/lib/table";
+import { Confirmation, notify } from "../../global/alerts/alerts.component";
+import { useAppDispatch } from "../../../redux/hooks";
+import { deletePatient } from "../../../redux/patients/patients.slice";
 
 interface Props {
 	data: PatientInfo[];
 }
 
 const PatientTable: React.FC<Props> = ({ data }) => {
+	const dispatch = useAppDispatch();
 	const columns: ColumnsType<PatientInfo> = [
 		{
 			title: "Full Name",
@@ -60,6 +64,32 @@ const PatientTable: React.FC<Props> = ({ data }) => {
 			title: "Occupation",
 			dataIndex: "occupation",
 			key: "occupation",
+		},
+		{
+			title: "Action",
+			render: (row): JSX.Element => {
+				return (
+					<div className="flex">
+						<Confirmation
+							confirmFn={(): void => {
+								dispatch(
+									deletePatient(row._id, () => {
+										notify(
+											"Patient deleted!",
+											"success"
+										);
+									})
+								);
+							}}
+							title="Click ok to delete this patient."
+						>
+							<Button size="small" danger>
+								Delete
+							</Button>
+						</Confirmation>
+					</div>
+				);
+			},
 		},
 	];
 

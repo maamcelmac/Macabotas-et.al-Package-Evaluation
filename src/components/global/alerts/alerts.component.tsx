@@ -1,6 +1,5 @@
 import React from "react";
 import { notification, Popconfirm, message } from "antd";
-import { NotificationApi } from "antd/lib/notification";
 
 export const notify = (
 	title: string,

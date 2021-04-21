@@ -19,7 +19,7 @@ const ConsulationsPage: React.FC = () => {
 		return () => {
 			dispatch(setCurrent(null));
 		};
-	}, [getSchedules]);
+	}, [dispatch]);
 	useEffect(() => {
 		if (schedules?.current) {
 			setModalVisibility(true);
@@ -28,7 +28,7 @@ const ConsulationsPage: React.FC = () => {
 			setModalVisibility(false);
 			setEditState(false);
 		}
-	}, [schedules?.current]);
+	}, [schedules]);
 	return (
 		<div>
 			<CreateScheduleModal

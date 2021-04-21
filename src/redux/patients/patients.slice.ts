@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { add, remove, update } from "../utils";
+import { createSlice } from "@reduxjs/toolkit";
+import { remove } from "../utils";
 import axios from "axios";
 import { AppThunk } from "../store";
 import { errorCatch } from "../utils";
@@ -43,7 +43,6 @@ export const getPatients = (): AppThunk => async (dispatch) => {
 	try {
 		const req = await axios.get("/patients/?status=true");
 		const res = await req.data;
-
 		if (res.success) {
 			setTimeout(() => {
 				dispatch(getPatientsSuccess(res.data));
@@ -81,7 +80,7 @@ export const getOnePatient = (
 	}
 };
 
-export const deleteSchedule = (
+export const deletePatient = (
 	id: string,
 	callback: () => void
 ): AppThunk => async (dispatch) => {
