@@ -1,9 +1,37 @@
-import { Form, Input, Button, Checkbox, Card } from "antd";
+import React, { useEffect } from "react";
+import { Form, Input, Button, Card } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import Logo from "../../../assets/logo.png";
+import { useAppDispatch } from "../../../redux/hooks";
+import { login, getAdminLoggedIn } from "../../../redux/auth/auth.slice";
+import { notify } from "../../../components/global/alerts/alerts.component";
+import setAuthToken from "../../../utils/setAuthToken";
+import { useHistory } from "react-router-dom";
+
+const token = localStorage.getItem("admin-token");
 const LoginForm: React.FC = () => {
+	const dispatch = useAppDispatch();
+	const history = useHistory();
+
+	useEffect(() => {
+		if (token) {
+			setAuthToken(token);
+
+			dispatch(
+				getAdminLoggedIn(() => {
+					history.push("/admin/dashboard");
+				})
+			);
+		}
+	}, [token, dispatch]);
+
 	const onFinish = (values: any) => {
-		console.log("Received values of form: ", values);
+		dispatch(
+			login(values, "admin", () => {
+				notify("Login success", "success");
+				history.push("/admin/dashboard");
+			})
+		);
 	};
 
 	return (
@@ -35,11 +63,11 @@ const LoginForm: React.FC = () => {
 					onFinish={onFinish}
 				>
 					<Form.Item
-						name="username"
+						name="email"
 						rules={[
 							{
 								required: true,
-								message: "Please input your Username!",
+								message: "Please input your Email!",
 							},
 						]}
 					>
@@ -47,7 +75,7 @@ const LoginForm: React.FC = () => {
 							prefix={
 								<UserOutlined className="site-form-item-icon" />
 							}
-							placeholder="Username"
+							placeholder="Email"
 						/>
 					</Form.Item>
 					<Form.Item

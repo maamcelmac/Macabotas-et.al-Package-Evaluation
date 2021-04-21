@@ -1,7 +1,9 @@
 import React from "react";
 import Logo from "../../../assets/logo.png";
 import { Button } from "antd";
+import { useHistory } from "react-router-dom";
 const Navbar: React.FC = () => {
+	const history = useHistory();
 	return (
 		<div className="main-navbar">
 			<div className="logo-container">
@@ -12,7 +14,15 @@ const Navbar: React.FC = () => {
 			</div>
 
 			<div className="navbar-options">
-				<Button> Logout </Button>
+				<Button
+					onClick={() => {
+						localStorage.removeItem("admin-token");
+						history.push("/login");
+					}}
+				>
+					{" "}
+					Logout{" "}
+				</Button>
 			</div>
 		</div>
 	);
