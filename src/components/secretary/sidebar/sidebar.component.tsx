@@ -15,7 +15,7 @@ const Sidebar: React.FC = () => {
 			<Menu
 				defaultSelectedKeys={["1"]}
 				defaultOpenKeys={["sub1"]}
-				style={{ width: "250px" }}
+				style={{ width: "220px" }}
 				mode="inline"
 				theme="dark"
 			>

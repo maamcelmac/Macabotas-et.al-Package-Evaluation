@@ -27,11 +27,12 @@ export interface Appointment {
 	_id: string;
 	patient: PatientInfo;
 	schedule: Schedule;
+	consultationRecord?: object | null;
+	queueNumber?: number;
+	type: string;
+	consultationForm?: object | null;
 	appointmentDate: Date;
 	appointmentStatus: string;
-	brgy: string;
-	city_municipality: string;
-	province: string;
 }
 
 export interface Schedule {
@@ -47,4 +48,5 @@ export interface Schedule {
 	currentNumber?: number;
 	startStatus: string;
 	createdAt: Date;
+	slotRemaining?: number;
 }

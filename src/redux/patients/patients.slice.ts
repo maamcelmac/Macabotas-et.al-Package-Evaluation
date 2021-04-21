@@ -4,7 +4,7 @@ import axios from "axios";
 import { AppThunk } from "../store";
 import { errorCatch } from "../utils";
 export const PatientsSlice = createSlice({
-	name: "schedules",
+	name: "patients",
 	initialState: {
 		loading: false,
 		patients: [],
