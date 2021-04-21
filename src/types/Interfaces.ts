@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export interface PatientInfo {
 	_id: string;
 	email: string;
@@ -39,8 +41,8 @@ export interface Schedule {
 	description: string;
 	healthWorker: string;
 	numberOfSlot: number;
-	consultationDate: Date;
-	consultationTime: Date;
+	consultationDate: any | moment.Moment;
+	consultationTime: any | moment.Moment;
 	isStarted: boolean;
 	currentNumber?: number;
 	startStatus: string;

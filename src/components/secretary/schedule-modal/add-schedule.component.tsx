@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
 	Modal,
 	Button,
@@ -12,29 +12,87 @@ import {
 import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
 import { RootState } from "../../../redux/store";
 import { Schedule } from "../../../types/Interfaces";
-import { createSchedule } from "../../../redux/schedules/schedule.slice";
+import {
+	createSchedule,
+	setCurrent,
+	updateSchedule,
+} from "../../../redux/schedules/schedule.slice";
 import { notify } from "../../global/alerts/alerts.component";
+import moment from "moment";
 const { Option } = Select;
 const { TextArea } = Input;
 interface Props {
 	visibility: boolean;
 	onCancel: () => void;
+	editState: boolean;
 }
-const CreateScheduleModal: React.FC<Props> = ({ visibility, onCancel }) => {
+const CreateScheduleModal: React.FC<Props> = ({
+	visibility,
+	onCancel,
+	editState,
+}) => {
 	const [form] = Form.useForm();
 	const dispatch = useAppDispatch();
 
 	const loading = useAppSelector(
 		(state: RootState) => state.schedules.loading
 	);
+	const currentData: any = useAppSelector(
+		(state: RootState) => state.schedules.current
+	);
+
+	useEffect(() => {
+		if (editState === true && currentData) {
+			form.setFieldsValue({
+				_id: editState && currentData?._id,
+				type: editState && currentData?.type,
+				title: editState && currentData?.title,
+				description: editState && currentData?.description,
+				healthWorker: editState && currentData?.healthWorker,
+				numberOfSlot: editState && currentData?.numberOfSlot,
+				consultationDate:
+					editState &&
+					currentData &&
+					moment(
+						moment(currentData?.consultationDate).format(
+							"YYYY/MM/DD"
+						),
+						"YYYY/MM/DD"
+					),
+				consultationTime:
+					editState &&
+					moment(
+						moment(currentData?.consultationTime).format(
+							"hh:mm:ss"
+						),
+						"hh:mm:ss"
+					),
+			});
+		}
+	}, [currentData, editState]);
+
 	const onFinish = async (val: Schedule) => {
-		dispatch(
-			createSchedule(val, () => {
-				notify("Schedule created!", "success");
-				form.resetFields();
-				onCancel();
-			})
-		);
+		if (editState === true && currentData) {
+			if (val._id) {
+				dispatch(
+					updateSchedule(val._id, val, () => {
+						notify("Schedule updated!", "success");
+						form.resetFields();
+						onCancel();
+					})
+				);
+			} else {
+				notify("Error updating information", "error");
+			}
+		} else {
+			dispatch(
+				createSchedule(val, () => {
+					notify("Schedule created!", "success");
+					form.resetFields();
+					onCancel();
+				})
+			);
+		}
 	};
 
 	return (
@@ -44,6 +102,7 @@ const CreateScheduleModal: React.FC<Props> = ({ visibility, onCancel }) => {
 				visible={visibility}
 				onCancel={() => {
 					onCancel();
+					dispatch(setCurrent(null));
 				}}
 				width={750}
 				onOk={() => {
@@ -53,7 +112,10 @@ const CreateScheduleModal: React.FC<Props> = ({ visibility, onCancel }) => {
 					<Button
 						htmlType="button"
 						key="cancel"
-						onClick={() => onCancel()}
+						onClick={() => {
+							onCancel();
+							dispatch(setCurrent(null));
+						}}
 					>
 						Close
 					</Button>,
@@ -75,6 +137,21 @@ const CreateScheduleModal: React.FC<Props> = ({ visibility, onCancel }) => {
 					id="createScheduleForm"
 					onFinish={onFinish}
 				>
+					{editState === true && currentData && (
+						<Form.Item
+							label="ID"
+							name="_id"
+							hidden
+							rules={[
+								{
+									required: true,
+									message: "Please input id!",
+								},
+							]}
+						>
+							<Input />
+						</Form.Item>
+					)}
 					<Form.Item
 						label="Consultation"
 						name="type"
@@ -198,7 +275,10 @@ const CreateScheduleModal: React.FC<Props> = ({ visibility, onCancel }) => {
 								},
 							]}
 						>
-							<TimePicker className="width-100" />
+							<TimePicker
+								className="width-100"
+								format="HH:mm"
+							/>
 						</Form.Item>
 					</div>
 				</Form>

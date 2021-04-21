@@ -3,11 +3,18 @@ import { Table, Button } from "antd";
 import { Schedule } from "../../../types/Interfaces";
 import { ColumnsType } from "antd/lib/table";
 import moment from "moment";
+import {
+	deleteSchedule,
+	setCurrent,
+} from "../../../redux/schedules/schedule.slice";
+import { Confirmation, notify } from "../../global/alerts/alerts.component";
+import { useAppDispatch } from "../../../redux/hooks";
 interface Props {
 	data: Schedule[];
 }
 
 const ScheduleTable: React.FC<Props> = ({ data }) => {
+	const dispatch = useAppDispatch();
 	const columns: ColumnsType<Schedule> = [
 		{
 			title: "Consultation",
@@ -45,8 +52,8 @@ const ScheduleTable: React.FC<Props> = ({ data }) => {
 		},
 		{
 			title: "Number of slots",
-			dataIndex: "consultationDate",
-			key: "consultationDate",
+			dataIndex: "numberOfSlot",
+			key: "numberOfSlot",
 		},
 		{
 			title: "Status",
@@ -63,21 +70,41 @@ const ScheduleTable: React.FC<Props> = ({ data }) => {
 			render: (row): JSX.Element => {
 				return (
 					<div className="flex">
-						<Button onClick={() => alert(row._id)}>
-							{" "}
-							Edit{" "}
+						<Button
+							className="mr-half"
+							size="small"
+							onClick={() => {
+								dispatch(setCurrent(row));
+							}}
+						>
+							Edit
 						</Button>
-						<Button danger onClick={() => alert(row._id)}>
-							{" "}
-							Delete{" "}
-						</Button>
+						<Confirmation
+							confirmFn={(): void => {
+								dispatch(
+									deleteSchedule(row._id, () => {
+										notify(
+											"Consulatation schedule deleted!",
+											"success"
+										);
+									})
+								);
+							}}
+							title="Click ok to delete this schedule"
+						>
+							<Button size="small" danger>
+								Delete
+							</Button>
+						</Confirmation>
 					</div>
 				);
 			},
 		},
 	];
 
-	return <Table<Schedule> dataSource={data} columns={columns} />;
+	return (
+		<Table<Schedule> rowKey="_id" dataSource={data} columns={columns} />
+	);
 };
 
 export default ScheduleTable;
