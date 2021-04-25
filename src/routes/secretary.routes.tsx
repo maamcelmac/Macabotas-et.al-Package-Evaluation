@@ -2,6 +2,7 @@ import React, { lazy } from "react";
 import { Switch, Route } from "react-router-dom";
 import Sidebar from "../components/secretary/sidebar/sidebar.component";
 import Navbar from "../components/secretary/navbar/navbar.component";
+import FamilyPlanningPage from "../pages/secretary/consultations/family-planning.page";
 
 const DashboardPage = lazy(
 	() => import("../pages/secretary/dashboard/dashboard.page")
@@ -18,6 +19,13 @@ const SchedulesPage = lazy(
 );
 const ReportsPage = lazy(
 	() => import("../pages/secretary/reports/reports.page")
+);
+
+const FamilyPlanningForm = lazy(
+	() =>
+		import(
+			"../pages/secretary/consultation-forms/family-planning-form.page"
+		)
 );
 
 const SecretaryRoutes: React.FC = () => {
@@ -48,6 +56,11 @@ const SecretaryRoutes: React.FC = () => {
 						<Route
 							path="/admin/reports"
 							component={ReportsPage}
+						/>
+
+						<Route
+							path="/admin/forms/family-planning"
+							component={FamilyPlanningForm}
 						/>
 					</Switch>
 				</div>

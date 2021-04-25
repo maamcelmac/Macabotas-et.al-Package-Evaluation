@@ -7,7 +7,6 @@ const SecretaryRoutes = lazy(() => import("./routes/secretary.routes"));
 
 const LoginPage = lazy(() => import("./pages/secretary/login/login.page"));
 
-const forAdmin = ["/admin"];
 const App: React.FC = () => {
 	useEffect(() => {
 		setAuthToken(localStorage.getItem("atkn"));
