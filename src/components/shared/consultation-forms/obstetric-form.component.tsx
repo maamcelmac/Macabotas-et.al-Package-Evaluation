@@ -1,17 +1,5 @@
-import React, { useState } from "react";
-import {
-	Form,
-	Select,
-	Radio,
-	InputNumber,
-	DatePicker,
-	Checkbox,
-	Button,
-	Input,
-	TimePicker,
-} from "antd";
-import { SelectValue } from "antd/lib/select";
-const { Option } = Select;
+import React from "react";
+import { Form, DatePicker, Button, Input, TimePicker } from "antd";
 const { TextArea } = Input;
 
 const ObstetricForm: React.FC = () => {
