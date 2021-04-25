@@ -23,6 +23,8 @@ export interface PatientInfo {
 	religion?: string;
 	weight?: string;
 	height?: string;
+	age?: number;
+	civilStatus?: string;
 	role: string;
 }
 
