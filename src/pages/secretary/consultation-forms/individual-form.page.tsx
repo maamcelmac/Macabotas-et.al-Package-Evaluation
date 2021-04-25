@@ -6,7 +6,11 @@ const IndividualFormPage: React.FC = () => {
 	return (
 		<div>
 			<Card title="Individual Treatment Record">
-				<IndividualForm />
+				<IndividualForm
+					onSubmit={(val: object) => {
+						console.log(val);
+					}}
+				/>
 			</Card>
 		</div>
 	);

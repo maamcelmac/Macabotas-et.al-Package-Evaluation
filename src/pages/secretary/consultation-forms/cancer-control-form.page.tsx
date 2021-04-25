@@ -6,7 +6,11 @@ const CancerControlFormPage: React.FC = () => {
 	return (
 		<div>
 			<Card title="Cancer Control & Prevention Program">
-				<CancerControlForm />
+				<CancerControlForm
+					onSubmit={(val: object) => {
+						console.log(val);
+					}}
+				/>
 			</Card>
 		</div>
 	);

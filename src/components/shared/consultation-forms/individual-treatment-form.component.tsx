@@ -1,11 +1,16 @@
 import React from "react";
 import { Form, DatePicker, Button, Input, Radio } from "antd";
+import { ConsultationFormProps } from "../../../types/Interfaces";
 
-const IndividualTreatmentForm: React.FC = () => {
+const IndividualTreatmentForm: React.FC<ConsultationFormProps> = ({
+	onSubmit,
+	initialValues,
+	userType,
+}) => {
 	const [form] = Form.useForm();
 
 	const onFinish = (val: object) => {
-		console.log(val);
+		onSubmit(val);
 	};
 
 	return (
@@ -16,6 +21,7 @@ const IndividualTreatmentForm: React.FC = () => {
 				name="basic"
 				id="createScheduleForm"
 				onFinish={onFinish}
+				initialValues={initialValues && initialValues}
 			>
 				<div className="flex pt-1 pb-1">
 					<Form.Item

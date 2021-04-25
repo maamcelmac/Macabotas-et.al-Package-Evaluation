@@ -55,3 +55,9 @@ export interface Schedule {
 	createdAt: Date;
 	slotRemaining?: number;
 }
+
+export interface ConsultationFormProps {
+	onSubmit: (val: object) => void;
+	initialValues?: object;
+	userType?: string;
+}

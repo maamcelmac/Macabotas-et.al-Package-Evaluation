@@ -1,12 +1,17 @@
 import React from "react";
 import { Form, DatePicker, Button, Input, TimePicker } from "antd";
+import { ConsultationFormProps } from "../../../types/Interfaces";
 const { TextArea } = Input;
 
-const ObstetricForm: React.FC = () => {
+const ObstetricForm: React.FC<ConsultationFormProps> = ({
+	onSubmit,
+	initialValues,
+	userType,
+}) => {
 	const [form] = Form.useForm();
 
 	const onFinish = (val: object) => {
-		console.log(val);
+		onSubmit(val);
 	};
 
 	return (
@@ -17,6 +22,7 @@ const ObstetricForm: React.FC = () => {
 				name="basic"
 				id="createScheduleForm"
 				onFinish={onFinish}
+				initialValues={initialValues && initialValues}
 			>
 				<div className="flex pt-1 pb-1">
 					<Form.Item

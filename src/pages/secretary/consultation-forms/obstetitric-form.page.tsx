@@ -6,7 +6,11 @@ const ObstetricFormPage: React.FC = () => {
 	return (
 		<div>
 			<Card title="For Obstetric and Gynecologocial Patient">
-				<ObstetricForm />
+				<ObstetricForm
+					onSubmit={(val: object) => {
+						console.log(val);
+					}}
+				/>
 			</Card>
 		</div>
 	);

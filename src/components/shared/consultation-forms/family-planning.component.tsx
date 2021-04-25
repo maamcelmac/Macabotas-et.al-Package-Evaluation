@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import { Form, Select, Radio, InputNumber, DatePicker, Button } from "antd";
 import { SelectValue } from "antd/lib/select";
+import { ConsultationFormProps } from "../../../types/Interfaces";
 const { Option } = Select;
 
-const FamilyPlanningForm: React.FC = () => {
+const FamilyPlanningForm: React.FC<ConsultationFormProps> = ({
+	onSubmit,
+	initialValues,
+	userType,
+}) => {
 	const [form] = Form.useForm();
 	const [typeOfClient, setTypeOfClient] = useState<SelectValue>(
 		"New Acceptor"
@@ -13,7 +18,7 @@ const FamilyPlanningForm: React.FC = () => {
 	);
 
 	const onFinish = (val: object) => {
-		console.log(val);
+		onSubmit(val);
 	};
 
 	return (
@@ -24,6 +29,7 @@ const FamilyPlanningForm: React.FC = () => {
 				name="basic"
 				id="createScheduleForm"
 				onFinish={onFinish}
+				initialValues={initialValues && initialValues}
 			>
 				<div className="flex pt-1 pb-1">
 					<Form.Item

@@ -6,7 +6,11 @@ const NutritionistPage: React.FC = () => {
 	return (
 		<div>
 			<Card title="Nutritionist Form">
-				<Nutritionist />
+				<Nutritionist
+					onSubmit={(val: object) => {
+						console.log(val);
+					}}
+				/>
 			</Card>
 		</div>
 	);
