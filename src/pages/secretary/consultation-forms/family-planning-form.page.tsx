@@ -5,7 +5,7 @@ import FamilyPlanningForm from "../../../components/shared/consultation-forms/fa
 const FamilyPlanningFormPage: React.FC = () => {
 	return (
 		<div>
-			<Card title="Cancer Control and Prevention Program">
+			<Card title="Family Planning">
 				<FamilyPlanningForm />
 			</Card>
 		</div>

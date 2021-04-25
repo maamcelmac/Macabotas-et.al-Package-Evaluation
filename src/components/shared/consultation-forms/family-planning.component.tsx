@@ -1,13 +1,5 @@
 import React, { useState } from "react";
-import {
-	Form,
-	Select,
-	Radio,
-	InputNumber,
-	DatePicker,
-	Checkbox,
-	Button,
-} from "antd";
+import { Form, Select, Radio, InputNumber, DatePicker, Button } from "antd";
 import { SelectValue } from "antd/lib/select";
 const { Option } = Select;
 
@@ -36,7 +28,7 @@ const FamilyPlanningForm: React.FC = () => {
 				<div className="flex pt-1 pb-1">
 					<Form.Item
 						label="NHTS?"
-						name="nhts?"
+						name="nhts"
 						className="col-2 col-md-6 col-sm-12 p-half"
 						rules={[
 							{

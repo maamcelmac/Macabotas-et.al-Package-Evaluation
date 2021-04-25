@@ -28,6 +28,10 @@ const FamilyPlanningForm = lazy(
 		)
 );
 
+const ObstetricForm = lazy(
+	() => import("../pages/secretary/consultation-forms/obstetitric-form.page")
+);
+
 const SecretaryRoutes: React.FC = () => {
 	return (
 		<div className="admin-page-wrapper">
@@ -61,6 +65,10 @@ const SecretaryRoutes: React.FC = () => {
 						<Route
 							path="/admin/forms/family-planning"
 							component={FamilyPlanningForm}
+						/>
+						<Route
+							path="/admin/forms/obstetric"
+							component={ObstetricForm}
 						/>
 					</Switch>
 				</div>

@@ -20,6 +20,9 @@ export interface PatientInfo {
 	province?: string;
 	status: boolean;
 	createdAt?: Date;
+	religion?: string;
+	weight?: string;
+	height?: string;
 	role: string;
 }
 
