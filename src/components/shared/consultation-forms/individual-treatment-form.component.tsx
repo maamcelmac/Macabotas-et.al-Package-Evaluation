@@ -1,6 +1,5 @@
 import React from "react";
-import { Form, DatePicker, Button, Input, TimePicker, Radio } from "antd";
-const { TextArea } = Input;
+import { Form, DatePicker, Button, Input, Radio } from "antd";
 
 const IndividualTreatmentForm: React.FC = () => {
 	const [form] = Form.useForm();
@@ -22,7 +21,7 @@ const IndividualTreatmentForm: React.FC = () => {
 					<Form.Item
 						label="Patient's Name:"
 						name="patientName"
-						className="col-7 col-md-6 col-sm-12 p-half"
+						className="col-7 col-md-12 col-sm-12 p-half"
 						rules={[
 							{
 								required: true,

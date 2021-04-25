@@ -5,7 +5,7 @@ import IndividualForm from "../../../components/shared/consultation-forms/indivi
 const IndividualFormPage: React.FC = () => {
 	return (
 		<div>
-			<Card title="For Obstetric and Gynecologocial Patient">
+			<Card title="Individual Treatment Record">
 				<IndividualForm />
 			</Card>
 		</div>

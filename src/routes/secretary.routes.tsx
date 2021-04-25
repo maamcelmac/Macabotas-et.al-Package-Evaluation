@@ -43,6 +43,11 @@ const IndividualFormPage = lazy(
 	() => import("../pages/secretary/consultation-forms/individual-form.page")
 );
 
+const NutritionistPage = lazy(
+	() =>
+		import("../pages/secretary/consultation-forms/nutritionist-form.page")
+);
+
 const SecretaryRoutes: React.FC = () => {
 	return (
 		<div className="admin-page-wrapper">
@@ -88,6 +93,10 @@ const SecretaryRoutes: React.FC = () => {
 						<Route
 							path="/admin/forms/individual-treatment"
 							component={IndividualFormPage}
+						/>
+						<Route
+							path="/admin/forms/nutritionist"
+							component={NutritionistPage}
 						/>
 					</Switch>
 				</div>

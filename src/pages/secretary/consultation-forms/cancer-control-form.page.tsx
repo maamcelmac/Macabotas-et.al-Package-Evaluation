@@ -5,7 +5,7 @@ import CancerControlForm from "../../../components/shared/consultation-forms/can
 const CancerControlFormPage: React.FC = () => {
 	return (
 		<div>
-			<Card title="Cancen Control & Prevention Program">
+			<Card title="Cancer Control & Prevention Program">
 				<CancerControlForm />
 			</Card>
 		</div>
