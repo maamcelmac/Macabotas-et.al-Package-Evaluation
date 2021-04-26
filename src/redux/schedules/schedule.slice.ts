@@ -3,6 +3,7 @@ import { add, remove, update } from "../utils";
 import axios from "axios";
 import { AppThunk } from "../store";
 import { errorCatch } from "../utils";
+import moment from "moment";
 export const ScheduleSlice = createSlice({
 	name: "schedules",
 	initialState: {
@@ -27,6 +28,7 @@ export const ScheduleSlice = createSlice({
 			state.loading = false;
 			state.schedules = action.payload;
 		},
+
 		deleteScheduleSuccess: (state, action) => {
 			state.loading = false;
 			state.schedules = remove(state.schedules, action.payload);
@@ -64,10 +66,21 @@ export const createSchedule = (
 	}
 };
 
-export const getSchedules = (): AppThunk => async (dispatch) => {
+export const getSchedules = (userType: string = "patient"): AppThunk => async (
+	dispatch
+) => {
 	dispatch(scheduleLoading());
 	try {
-		const req = await axios.get("/schedules/?status=true");
+		let req;
+		if (userType === "patient") {
+			req = await axios.get(
+				`/schedules/?status=true&consultationDate[gt]=${moment(
+					Date.now()
+				).format("YYYY-MM-DD")}`
+			);
+		} else {
+			req = await axios.get("/schedules/?status=true");
+		}
 		const res = await req.data;
 
 		if (res.success) {

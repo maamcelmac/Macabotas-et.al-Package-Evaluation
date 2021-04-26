@@ -1,12 +1,13 @@
 import React from "react";
 import { Drawer, Menu } from "antd";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 
 interface Props {
 	visible: boolean;
 	onClose: () => void;
 }
 const PatientMenu: React.FC<Props> = ({ visible, onClose }) => {
+	const history = useHistory();
 	return (
 		<>
 			<Drawer
@@ -38,8 +39,14 @@ const PatientMenu: React.FC<Props> = ({ visible, onClose }) => {
 							My Account
 						</NavLink>
 					</Menu.Item>
-					<Menu.Item key="4">
-						<NavLink to="/patients/logout">Logout</NavLink>
+					<Menu.Item
+						key="4"
+						onClick={() => {
+							localStorage.removeItem("patient-token");
+							history.push("/patient-login");
+						}}
+					>
+						Logout
 					</Menu.Item>
 				</Menu>
 			</Drawer>

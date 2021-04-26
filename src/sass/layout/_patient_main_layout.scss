@@ -1,14 +1,14 @@
 .patient-page-wrapper {
 	width: 100%;
 	min-width: 400px;
-	background: rgb(244, 244, 244);
+	background: rgb(247, 247, 247);
 	padding: 0;
 	margin: 0;
 	min-height: 100vh;
 
 	.patient-main-content {
 		height: 100vh !important;
-		padding: 24px;
+		padding: 16px;
 		padding-top: 90px;
 		overflow: auto;
 	}
@@ -20,6 +20,7 @@
 		font-size: 25px;
 		cursor: pointer !important;
 		z-index: 10;
+		color: #fff;
 	}
 	.patient-page-header {
 		width: 100%;
@@ -28,16 +29,17 @@
 		align-items: center;
 		position: relative;
 		height: 75px;
-		background: #fff;
+		background: #2ecc71;
 		position: fixed;
 		top: 0;
 		left: 0;
+		z-index: 9;
 
 		h3 {
-			font-size: 1.7rem;
+			font-size: 1.8rem;
 			width: 90%;
 			padding-left: 7px;
-			color: #444;
+			color: #fff;
 			margin: 0;
 		}
 	}
@@ -47,4 +49,13 @@
 	.ant-drawer-body {
 		padding: 0 !important;
 	}
+}
+
+.card {
+	border-radius: 20px;
+	background: #fff;
+	padding: 12px;
+	margin: 20px 0;
+	box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.1);
+	border-right: 3px solid #2ecc71;
 }

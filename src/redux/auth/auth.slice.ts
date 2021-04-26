@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { remove, update } from "../utils";
 import axios from "axios";
 import { AppThunk } from "../store";
 import { errorCatch } from "../utils";
@@ -40,31 +39,13 @@ export const Auth = createSlice({
 			state.user = action.payload;
 			state.isAuthenticated = true;
 		},
+		getPatientLoggedInSuccess: (state, action) => {
+			state.loading = false;
+			state.user = action.payload;
+			state.isAuthenticated = true;
+		},
 	},
 });
-
-// export const register = (
-// 	type: string,
-// 	status: string
-// ): AppThunk => async (dispatch) => {
-// 	dispatch(appointmentLoading());
-// 	try {
-// 		const req = await axios.get(
-// 			`/appointments/?status=true&type=${type}&appointmentStatus=${status}`
-// 		);
-// 		const res = await req.data;
-// 		if (res.success) {
-// 			setTimeout(() => {
-// 				dispatch(getAppointmentsSuccess(res.data));
-// 			}, 500);
-// 		} else {
-// 			throw Error;
-// 		}
-// 	} catch (error) {
-// 		errorCatch(error, "Error loading appointments!");
-// 		dispatch(appointmentError(error));
-// 	}
-// };
 
 export const login = (
 	payload: { email: string; password: string },
@@ -75,6 +56,8 @@ export const login = (
 	try {
 		let req;
 		if (type === "admin") {
+			alert("wyhe");
+
 			req = await axios.post(`/auth/admin-login`, payload);
 		} else {
 			req = await axios.post(`/auth/patient-login`, payload);
@@ -90,6 +73,37 @@ export const login = (
 		}
 	} catch (error) {
 		errorCatch(error, "Error Login!");
+		dispatch(authError(error));
+	}
+};
+
+export const register = (
+	payload: any,
+	type: string = "patient",
+	callback: () => void
+): AppThunk => async (dispatch) => {
+	dispatch(authLoading());
+	try {
+		let req;
+
+		if (type === "admin") {
+			req = await axios.post(`/auth/admin-register`, payload);
+		} else {
+			req = await axios.post(`/auth/patient-register`, payload);
+		}
+		const res = await req.data;
+
+		if (res.success) {
+			setTimeout(() => {
+				dispatch(loginSuccess(res));
+				callback();
+			}, 500);
+		} else {
+			throw Error;
+		}
+	} catch (error) {
+		console.log(error);
+		errorCatch(error, "Error Registration!");
 		dispatch(authError(error));
 	}
 };
@@ -117,12 +131,36 @@ export const getAdminLoggedIn = (callback: () => void): AppThunk => async (
 	}
 };
 
+export const getPatientLoggedIn = (callback: () => void): AppThunk => async (
+	dispatch
+) => {
+	dispatch(authLoading());
+	try {
+		let req;
+
+		req = await axios.get(`/auth/get-patient`);
+		const res = await req.data;
+		if (res.success) {
+			setTimeout(() => {
+				dispatch(getPatientLoggedInSuccess(res.data));
+				callback();
+			}, 500);
+		} else {
+			throw Error;
+		}
+	} catch (error) {
+		errorCatch(error, "Error Login!");
+		dispatch(authError(error));
+	}
+};
+
 export const {
 	authLoading,
 	authError,
 	registerSuccess,
 	loginSuccess,
 	getAdminLoggedInSuccess,
+	getPatientLoggedInSuccess,
 } = Auth.actions;
 
 export default Auth.reducer;
