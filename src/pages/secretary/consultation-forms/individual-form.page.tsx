@@ -10,7 +10,7 @@ const IndividualFormPage: React.FC = () => {
 					onSubmit={(val: object) => {
 						console.log(val);
 					}}
-				/>
+				 />
 			</Card>
 		</div>
 	);

@@ -26,6 +26,11 @@ export interface PatientInfo {
 	age?: number;
 	civilStatus?: string;
 	role: string;
+	familyPlanning: object | null;
+	obstetric: object | null;
+	individualTreatment: object | null;
+	cancerControl: object | null;
+	nutritionist: object | null;
 }
 
 export interface Appointment {
