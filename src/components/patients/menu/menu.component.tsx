@@ -26,12 +26,12 @@ const PatientMenu: React.FC<Props> = ({ visible, onClose }) => {
 				>
 					<Menu.Item key="1">
 						<NavLink to="/patients/consultations">
-							Consultation
+							Consultations
 						</NavLink>
 					</Menu.Item>
 					<Menu.Item key="2">
 						<NavLink to="/patients/my-schedules">
-							My Schedules
+							My Appointments
 						</NavLink>
 					</Menu.Item>
 					<Menu.Item key="3">

@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, DatePicker, Button, Input, Radio } from "antd";
 import { ConsultationFormProps } from "../../../types/Interfaces";
+import PersonalDataForm from "./personal-data-form.component";
 
 const IndividualTreatmentForm: React.FC<ConsultationFormProps> = ({
 	onSubmit,
@@ -16,7 +17,7 @@ const IndividualTreatmentForm: React.FC<ConsultationFormProps> = ({
 	return (
 		<div>
 			<Form
-				layout="horizontal"
+				layout="vertical"
 				form={form}
 				name="basic"
 				id="createScheduleForm"
@@ -24,20 +25,7 @@ const IndividualTreatmentForm: React.FC<ConsultationFormProps> = ({
 				initialValues={initialValues && initialValues}
 			>
 				<div className="flex pt-1 pb-1">
-					<Form.Item
-						label="Patient's Name:"
-						name="patientName"
-						className="col-7 col-md-12 col-sm-12 p-half"
-						rules={[
-							{
-								required: true,
-								message: "Please fill out this field!",
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
-
+					<PersonalDataForm />
 					<Form.Item
 						label="FSN:"
 						name="FSN"
@@ -53,135 +41,9 @@ const IndividualTreatmentForm: React.FC<ConsultationFormProps> = ({
 					</Form.Item>
 
 					<Form.Item
-						label="CP #:"
-						name="phoneNumber"
-						className="col-3 col-md-6 col-sm-12 p-half"
-						rules={[
-							{
-								required: true,
-								message: "Please fill out this field!",
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
-
-					<Form.Item
-						label="Address:"
-						name="address"
-						className="col-6 col-md-12 col-sm-12 p-half"
-						rules={[
-							{
-								required: true,
-								message: "Please fill out this field!",
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
-
-					<Form.Item
 						label="HF:"
 						name="HF"
 						className="col-3 col-md-6 col-sm-12 p-half"
-						rules={[
-							{
-								required: true,
-								message: "Please fill out this field!",
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
-
-					<Form.Item
-						label="Religion:"
-						name="religion"
-						className="col-3 col-md-6 col-sm-12 p-half"
-						rules={[
-							{
-								required: true,
-								message: "Please fill out this field!",
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
-
-					<Form.Item
-						label="Sex:"
-						name="gender"
-						className="col-2 col-md-6 col-sm-12 p-half"
-						rules={[
-							{
-								required: true,
-								message: "Please fill out this field!",
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
-
-					<Form.Item
-						label="Age:"
-						name="age"
-						className="col-2 col-md-6 col-sm-12 p-half"
-						rules={[
-							{
-								required: true,
-								message: "Please fill out this field!",
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
-
-					<Form.Item
-						label="Birth date:"
-						name="birthdate"
-						className="col-4 col-md-6 col-sm-12 p-half"
-						rules={[
-							{
-								required: true,
-								message: "Please fill out this field!",
-							},
-						]}
-					>
-						<DatePicker style={{ width: "100%" }} />
-					</Form.Item>
-
-					<Form.Item
-						label="Occupation:"
-						name="occupation"
-						className="col-4 col-md-6 col-sm-12 p-half"
-						rules={[
-							{
-								required: true,
-								message: "Please fill out this field!",
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
-
-					<Form.Item
-						label="Civil Status:"
-						name="civilStatus"
-						className="col-4 col-md-6 col-sm-12 p-half"
-						rules={[
-							{
-								required: true,
-								message: "Please fill out this field!",
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
-
-					<Form.Item
-						label="Phil Health No.:"
-						name="philHealthNumber"
-						className="col-4 col-md-6 col-sm-12 p-half"
 						rules={[
 							{
 								required: true,
@@ -222,7 +84,7 @@ const IndividualTreatmentForm: React.FC<ConsultationFormProps> = ({
 
 					<Form.Item
 						label="Type"
-						name="type"
+						name="patientType"
 						className="col-6 col-md-6 col-sm-12 p-half"
 						rules={[
 							{

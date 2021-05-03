@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, Button, Input, Radio } from "antd";
 import { ConsultationFormProps } from "../../../types/Interfaces";
+import PersonalDataForm from "./personal-data-form.component";
 const { TextArea } = Input;
 
 const CancenControlForm: React.FC<ConsultationFormProps> = ({
@@ -25,32 +26,7 @@ const CancenControlForm: React.FC<ConsultationFormProps> = ({
 				initialValues={initialValues && initialValues}
 			>
 				<div className="flex pt-1 pb-1">
-					<Form.Item
-						label="Patient's Name:"
-						name="patientName"
-						className="col-12 col-md-6 col-sm-12 p-half"
-						rules={[
-							{
-								required: true,
-								message: "Please fill out this field!",
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
-					<Form.Item
-						label="Address:"
-						name="address"
-						className="col-12 col-md-6 col-sm-12 p-half"
-						rules={[
-							{
-								required: true,
-								message: "Please fill out this field!",
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
+					<PersonalDataForm />
 					<Form.Item
 						label="Registry No.:"
 						name="registryNumber"
@@ -64,19 +40,7 @@ const CancenControlForm: React.FC<ConsultationFormProps> = ({
 					>
 						<Input />
 					</Form.Item>
-					<Form.Item
-						label="Age:"
-						name="age"
-						className="col-4 col-md-6 col-sm-12 p-half"
-						rules={[
-							{
-								required: true,
-								message: "Please fill out this field!",
-							},
-						]}
-					>
-						<Input />
-					</Form.Item>
+
 					<Form.Item
 						label="Date of Last Pap Smear:"
 						name="lastPapSmearDate"

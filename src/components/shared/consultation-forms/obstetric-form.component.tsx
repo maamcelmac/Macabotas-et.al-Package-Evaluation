@@ -1,6 +1,7 @@
 import React from "react";
 import { Form, DatePicker, Button, Input, TimePicker } from "antd";
 import { ConsultationFormProps } from "../../../types/Interfaces";
+import PersonalDataForm from "./personal-data-form.component";
 const { TextArea } = Input;
 
 const ObstetricForm: React.FC<ConsultationFormProps> = ({
@@ -17,7 +18,7 @@ const ObstetricForm: React.FC<ConsultationFormProps> = ({
 	return (
 		<div>
 			<Form
-				layout="horizontal"
+				layout="vertical"
 				form={form}
 				name="basic"
 				id="createScheduleForm"
@@ -25,6 +26,7 @@ const ObstetricForm: React.FC<ConsultationFormProps> = ({
 				initialValues={initialValues && initialValues}
 			>
 				<div className="flex pt-1 pb-1">
+					<PersonalDataForm />
 					<Form.Item
 						label="To:"
 						name="to"
@@ -104,49 +106,6 @@ const ObstetricForm: React.FC<ConsultationFormProps> = ({
 						]}
 					>
 						<TimePicker style={{ width: "100%" }} />
-					</Form.Item>
-
-					<Form.Item
-						label="Name of Patient:"
-						name="patientName"
-						className="col-6 col-md-12 col-sm-12 p-half"
-						rules={[
-							{
-								required: true,
-								message: "Please fill out this field!",
-							},
-						]}
-					>
-						{" "}
-						<Input />
-					</Form.Item>
-					<Form.Item
-						label="Age:"
-						name="age"
-						className="col-2 col-md-6 col-sm-12 p-half"
-						rules={[
-							{
-								required: true,
-								message: "Please fill out this field!",
-							},
-						]}
-					>
-						{" "}
-						<Input />
-					</Form.Item>
-					<Form.Item
-						label="Civil Status:"
-						name="civilStatus"
-						className="col-4 col-md-6 col-sm-12 p-half"
-						rules={[
-							{
-								required: true,
-								message: "Please fill out this field!",
-							},
-						]}
-					>
-						{" "}
-						<Input />
 					</Form.Item>
 
 					<Form.Item

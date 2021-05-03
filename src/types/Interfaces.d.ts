@@ -43,6 +43,8 @@ export interface Appointment {
 	consultationForm?: object | null;
 	appointmentDate: Date;
 	appointmentStatus: string;
+	status: boolean;
+	createdAt: any;
 }
 
 export interface Schedule {
@@ -58,7 +60,7 @@ export interface Schedule {
 	currentNumber?: number;
 	startStatus: string;
 	createdAt: Date;
-	slotRemaining?: number;
+	nextSlotToGive: number;
 }
 
 export interface ConsultationFormProps {

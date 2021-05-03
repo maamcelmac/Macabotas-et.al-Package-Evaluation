@@ -25,11 +25,11 @@ const LoginForm: React.FC = () => {
 		}
 	}, [token, dispatch]);
 
-	const onFinish = (values: any) => {
+	const onLogin = (values: any) => {
 		dispatch(
 			login(values, "patient", () => {
 				notify("Login success", "success");
-				history.push("/patients/consultations");
+				window.location.reload();
 			})
 		);
 	};
@@ -63,7 +63,7 @@ const LoginForm: React.FC = () => {
 					initialValues={{
 						remember: true,
 					}}
-					onFinish={onFinish}
+					onFinish={onLogin}
 				>
 					<Form.Item
 						name="email"

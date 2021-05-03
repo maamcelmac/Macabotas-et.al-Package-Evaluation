@@ -1,7 +1,16 @@
 import React, { useState } from "react";
-import { Form, Select, Radio, InputNumber, DatePicker, Button } from "antd";
+import {
+	Form,
+	Select,
+	Radio,
+	InputNumber,
+	DatePicker,
+	Button,
+	Input,
+} from "antd";
 import { SelectValue } from "antd/lib/select";
 import { ConsultationFormProps } from "../../../types/Interfaces";
+import PersonalDataForm from "./personal-data-form.component";
 const { Option } = Select;
 
 const FamilyPlanningForm: React.FC<ConsultationFormProps> = ({
@@ -32,6 +41,8 @@ const FamilyPlanningForm: React.FC<ConsultationFormProps> = ({
 				initialValues={initialValues && initialValues}
 			>
 				<div className="flex pt-1 pb-1">
+					<PersonalDataForm />
+
 					<Form.Item
 						label="NHTS?"
 						name="nhts"

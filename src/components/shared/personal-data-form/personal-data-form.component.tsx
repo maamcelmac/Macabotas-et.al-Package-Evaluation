@@ -174,7 +174,7 @@ const PersonalDataForm: React.FC<ConsultationFormProps> = ({
 					<Form.Item
 						className="col-6 col-md-12 col-sm-12 p-half"
 						label="Address Line"
-						name="adress"
+						name="address"
 						rules={[
 							{
 								required: true,

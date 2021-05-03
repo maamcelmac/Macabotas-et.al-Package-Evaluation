@@ -66,9 +66,10 @@ export const createSchedule = (
 	}
 };
 
-export const getSchedules = (userType: string = "patient"): AppThunk => async (
-	dispatch
-) => {
+export const getSchedules = (
+	userType: string = "patient",
+	patientId?: string
+): AppThunk => async (dispatch) => {
 	dispatch(scheduleLoading());
 	try {
 		let req;

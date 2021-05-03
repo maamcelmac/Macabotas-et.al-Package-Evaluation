@@ -2,14 +2,21 @@ import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { AppThunk } from "../store";
 import { errorCatch } from "../utils";
+import { PatientInfo } from "../../types/Interfaces";
+interface InitialState {
+	loading: boolean;
+	user?: PatientInfo;
+	error: any | null;
+	isAuthenticated: boolean;
+}
 export const Auth = createSlice({
 	name: "auth",
 	initialState: {
 		loading: false,
-		user: null,
+		user: {},
 		error: null,
 		isAuthenticated: false,
-	},
+	} as InitialState,
 	reducers: {
 		authLoading: (state) => {
 			state.loading = true;
@@ -56,8 +63,6 @@ export const login = (
 	try {
 		let req;
 		if (type === "admin") {
-			alert("wyhe");
-
 			req = await axios.post(`/auth/admin-login`, payload);
 		} else {
 			req = await axios.post(`/auth/patient-login`, payload);

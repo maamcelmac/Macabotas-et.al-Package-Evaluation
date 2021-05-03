@@ -17,8 +17,28 @@ const ConsultationList: React.FC<Props> = ({ data }) => {
 					<List.Item
 						className="card"
 						onClick={() => {
+							let { type } = item;
+							let url;
+
+							if (type === "Family Planning") {
+								url = "family-planning";
+							} else if (
+								type === "Obstetric and Gynecological"
+							) {
+								url = "obstetric";
+							} else if (type === "Individual Treatment") {
+								url = "individual-treatment";
+							} else if (
+								type ===
+								"Cancer Control and Prevention Program"
+							) {
+								url = "cancer-control";
+							} else if (type === "Nutritionist") {
+								url = "nutritionist";
+							}
+
 							history.push(
-								`/patients/consultations/${item?._id}`
+								`/patients/consultations/${url}/${item?._id}`
 							);
 						}}
 					>
@@ -52,16 +72,17 @@ const ConsultationList: React.FC<Props> = ({ data }) => {
 											: item?.description}
 									</p>
 									<small>
-										{" "}
-										Health Worker:{" "}
+										Health Worker:
 										{item?.healthWorker}
 									</small>
 
 									<div className="flex">
 										<small>
-											{" "}
-											Slots Remaining:{" "}
-											{item?.slotRemaining}
+											Slot:
+											{` ${
+												item?.nextSlotToGive -
+												1
+											}/${item?.numberOfSlot}`}
 										</small>
 									</div>
 								</div>

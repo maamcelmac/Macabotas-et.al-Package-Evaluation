@@ -74,7 +74,7 @@ const DasboardPage: React.FC = () => {
 
 			<Row gutter={16}>
 				<Col span={16}>
-					<QueueManage
+					{/* <QueueManage
 						schedule={{
 							_id: "12345",
 							type: "Family Planning",
@@ -89,7 +89,7 @@ const DasboardPage: React.FC = () => {
 							currentNumber: 5,
 							description: "nice",
 						}}
-					/>
+					/> */}
 				</Col>
 			</Row>
 		</div>
