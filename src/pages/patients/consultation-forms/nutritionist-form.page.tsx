@@ -3,7 +3,7 @@ import { Card } from "antd";
 import Nutritionist from "../../../components/shared/consultation-forms/nutritionist-form.component";
 import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
 import { createAppointment } from "../../../redux/appointments/appointments.slice";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link , useHistory} from "react-router-dom";
 import { notify } from "../../../components/global/alerts/alerts.component";
 import { PatientInfo } from "../../../types/Interfaces";
 import { ArrowLeftOutlined } from "@ant-design/icons";
@@ -13,6 +13,7 @@ const NutritionistPage: React.FC = () => {
 	const currentUser: PatientInfo | any = useAppSelector(
 		(state) => state.auth.user
 	);
+	const history = useHistory();
 	return (
 		currentUser &&
 		currentUser && (
@@ -46,6 +47,9 @@ const NutritionistPage: React.FC = () => {
 										notify(
 											"Appointment created.",
 											"success"
+										);
+										history.push(
+											"/patients/my-schedules"
 										);
 									}
 								)

@@ -19,32 +19,29 @@ const ScheduleTable: React.FC<Props> = ({ data }) => {
 		{
 			title: "Consultation",
 			dataIndex: "type",
-			key: "type",
 		},
 		{
 			title: "Title",
 			dataIndex: "title",
-			key: "title",
 		},
 		{
 			title: "Description",
 			dataIndex: "description",
-			key: "description",
 		},
 		{
 			title: "Health Worker",
 			dataIndex: "healthWorker",
-			key: "healthWorker",
+			render: (val: any) => {
+				return `${val?.fname} ${val?.mname} ${val?.lname}`;
+			},
 		},
 		{
 			title: "Number of slots",
 			dataIndex: "numberOfSlot",
-			key: "numberOfSlot",
 		},
 		{
 			title: "Date & Time",
 			dataIndex: "consultationDate",
-			key: "consultationDate",
 			render: (date, row) =>
 				`${moment(date).format("MMMM DD, YYYY")} ${moment(
 					row.consultationTime
@@ -53,17 +50,14 @@ const ScheduleTable: React.FC<Props> = ({ data }) => {
 		{
 			title: "Number of slots",
 			dataIndex: "numberOfSlot",
-			key: "numberOfSlot",
 		},
 		{
 			title: "Status",
 			dataIndex: "startStatus",
-			key: "startStatus",
 		},
 		{
 			title: "Current Number",
 			dataIndex: "currentNumber",
-			key: "currentNumber",
 		},
 		{
 			title: "Action",

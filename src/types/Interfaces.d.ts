@@ -33,6 +33,23 @@ export interface PatientInfo {
 	nutritionist: object | null;
 }
 
+export interface DoctorInfo {
+	_id: string;
+	email: string;
+	fname: string;
+	mname: string;
+	lname: string;
+	gender: string;
+	phoneNumber: string;
+	address: string;
+	brgy: string;
+	city_municipality: string;
+	province: string;
+	status: boolean;
+	createdAt: any | moment.Moment;
+	role: string;
+}
+
 export interface Appointment {
 	_id: string;
 	patient: PatientInfo;

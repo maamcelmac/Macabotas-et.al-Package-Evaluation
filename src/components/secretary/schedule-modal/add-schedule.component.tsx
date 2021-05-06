@@ -41,6 +41,10 @@ const CreateScheduleModal: React.FC<Props> = ({
 		(state: RootState) => state.schedules.current
 	);
 
+	const doctors: any = useAppSelector(
+		(state: RootState) => state.doctors.doctors
+	);
+
 	useEffect(() => {
 		if (editState === true && currentData) {
 			form.setFieldsValue({
@@ -228,7 +232,20 @@ const CreateScheduleModal: React.FC<Props> = ({
 								},
 							]}
 						>
-							<Input className="width-100" />
+							<Select>
+								{doctors &&
+									doctors.map((item: any) => {
+										return (
+											<Option
+												key={item?._id}
+												value={item?._id}
+											>
+												{" "}
+												{`${item?.fname} ${item?.mname} ${item?.lname}`}
+											</Option>
+										);
+									})}
+							</Select>
 						</Form.Item>
 
 						<Form.Item

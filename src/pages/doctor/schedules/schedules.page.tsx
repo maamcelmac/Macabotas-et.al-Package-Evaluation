@@ -1,35 +1,24 @@
 import React, { useState, useEffect } from "react";
 import SchedulesTable from "../../../components/secretary/schedule-table/schedule-table.component";
-import { Card, Button, Skeleton } from "antd";
+import { Card, Skeleton } from "antd";
 import CreateScheduleModal from "../../../components/secretary/schedule-modal/add-schedule.component";
 import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
-import {
-	getSchedules,
-	setCurrent,
-} from "../../../redux/schedules/schedule.slice";
-import { getDoctors } from "../../../redux/doctor/doctor.slice";
+import { getSchedulesByDoctor } from "../../../redux/schedules/schedule.slice";
 
 const ConsulationsPage: React.FC = () => {
 	const [modalVisibility, setModalVisibility] = useState<boolean>(false);
 	const dispatch = useAppDispatch();
 	const schedules = useAppSelector((state) => state.schedules);
+	const currentUser = useAppSelector((state) => state.auth.user);
+
 	const [editState, setEditState] = useState<boolean>(false);
 	useEffect(() => {
-		dispatch(getSchedules());
-		dispatch(getDoctors());
-		return () => {
-			dispatch(setCurrent(null));
-		};
-	}, [dispatch]);
-	useEffect(() => {
-		if (schedules?.current) {
-			setModalVisibility(true);
-			setEditState(true);
-		} else {
-			setModalVisibility(false);
-			setEditState(false);
-		}
-	}, [schedules]);
+		if (!currentUser) return;
+
+		alert(currentUser?._id);
+		dispatch(getSchedulesByDoctor(currentUser?._id));
+	}, [dispatch, currentUser]);
+
 	return (
 		<div>
 			<CreateScheduleModal
@@ -39,20 +28,7 @@ const ConsulationsPage: React.FC = () => {
 				}}
 				visibility={modalVisibility}
 			/>
-			<Card
-				title="Consultation Schedules"
-				extra={
-					<Button
-						type="primary"
-						onClick={(): void => {
-							setModalVisibility(true);
-						}}
-					>
-						{" "}
-						Create Schedule
-					</Button>
-				}
-			>
+			<Card title="Consultation Schedules">
 				<Skeleton loading={schedules?.loading}>
 					<SchedulesTable data={schedules?.schedules} />
 				</Skeleton>

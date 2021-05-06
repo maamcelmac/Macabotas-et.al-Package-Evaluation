@@ -48,6 +48,10 @@ const NutritionistPage = lazy(
 		import("../pages/secretary/consultation-forms/nutritionist-form.page")
 );
 
+const DoctorsPage = lazy(
+	() => import("../pages/secretary/doctors/doctors.page")
+);
+
 const SecretaryRoutes: React.FC = () => {
 	return (
 		<div className="admin-page-wrapper">
@@ -66,13 +70,18 @@ const SecretaryRoutes: React.FC = () => {
 							component={ConsultationsPage}
 						/>
 						<Route
-							path="/admin/patients"
-							component={PatientsPage}
-						/>
-						<Route
 							path="/admin/schedules"
 							component={SchedulesPage}
 						/>
+						<Route
+							path="/admin/doctors"
+							component={DoctorsPage}
+						/>
+						<Route
+							path="/admin/patients"
+							component={PatientsPage}
+						/>
+
 						<Route
 							path="/admin/reports"
 							component={ReportsPage}

@@ -51,6 +51,11 @@ export const Auth = createSlice({
 			state.user = action.payload;
 			state.isAuthenticated = true;
 		},
+		getDoctorLoggedInSuccess: (state, action) => {
+			state.loading = false;
+			state.user = action.payload;
+			state.isAuthenticated = true;
+		},
 	},
 });
 
@@ -64,8 +69,11 @@ export const login = (
 		let req;
 		if (type === "admin") {
 			req = await axios.post(`/auth/admin-login`, payload);
-		} else {
+		} else if (type === "patient") {
 			req = await axios.post(`/auth/patient-login`, payload);
+		} else {
+			alert(type);
+			req = await axios.post(`/auth/doctor-login`, payload);
 		}
 		const res = await req.data;
 		if (res.success) {
@@ -159,6 +167,29 @@ export const getPatientLoggedIn = (callback: () => void): AppThunk => async (
 	}
 };
 
+export const getDoctorLoggedIn = (callback: () => void): AppThunk => async (
+	dispatch
+) => {
+	dispatch(authLoading());
+	try {
+		let req;
+
+		req = await axios.get(`/auth/get-doctor`);
+		const res = await req.data;
+		if (res.success) {
+			setTimeout(() => {
+				dispatch(getDoctorLoggedInSuccess(res.data));
+				callback();
+			}, 500);
+		} else {
+			throw Error;
+		}
+	} catch (error) {
+		errorCatch(error, "Error Login!");
+		dispatch(authError(error));
+	}
+};
+
 export const {
 	authLoading,
 	authError,
@@ -166,6 +197,7 @@ export const {
 	loginSuccess,
 	getAdminLoggedInSuccess,
 	getPatientLoggedInSuccess,
+	getDoctorLoggedInSuccess,
 } = Auth.actions;
 
 export default Auth.reducer;

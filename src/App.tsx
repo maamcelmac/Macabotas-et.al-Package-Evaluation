@@ -15,6 +15,10 @@ const PatientRegistrationPage = lazy(
 );
 
 const PatientsRoutes = lazy(() => import("./routes/patients.routes"));
+
+const DoctorRoutes = lazy(() => import("./routes/doctor.routes"));
+const DoctorLogin = lazy(() => import("./pages/doctor/login/login.page"));
+
 const App: React.FC = () => {
 	useEffect(() => {
 		setAuthToken(localStorage.getItem("atkn"));
@@ -29,16 +33,23 @@ const App: React.FC = () => {
 							path="/admin"
 							component={SecretaryRoutes}
 						/>
+						<Route path="/login" component={LoginPage} />
+
 						<Route
 							path="/patients"
 							component={PatientsRoutes}
 						/>
-						<Route path="/login" component={LoginPage} />
-
 						<Route
 							path="/patient-login"
 							component={PatientLoginPage}
 						/>
+
+						<Route path="/doctor" component={DoctorRoutes} />
+						<Route
+							path="/doctor-login"
+							component={DoctorLogin}
+						/>
+
 						<Route
 							path="/patient-registration"
 							component={PatientRegistrationPage}
