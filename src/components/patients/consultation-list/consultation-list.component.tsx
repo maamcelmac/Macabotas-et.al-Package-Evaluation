@@ -22,15 +22,12 @@ const ConsultationList: React.FC<Props> = ({ data }) => {
 
 							if (type === "Family Planning") {
 								url = "family-planning";
-							} else if (
-								type === "Obstetric and Gynecological"
-							) {
+							} else if (type === "Obstetric and Gynecological") {
 								url = "obstetric";
 							} else if (type === "Individual Treatment") {
 								url = "individual-treatment";
 							} else if (
-								type ===
-								"Cancer Control and Prevention Program"
+								type === "Cancer Control and Prevention Program"
 							) {
 								url = "cancer-control";
 							} else if (type === "Nutritionist") {
@@ -45,44 +42,39 @@ const ConsultationList: React.FC<Props> = ({ data }) => {
 						<List.Item.Meta
 							title={
 								<div>
-									<p>
+									<p className="m-0">
 										{item?.type} - {item?.title}
 									</p>
 									<small>
-										{moment(
-											item?.consultationDate
-										).format(
+										{moment(item?.consultationDate).format(
 											"MMMM DD, YYYY"
 										)}{" "}
 										-{" "}
-										{moment(
-											item?.consultationTime
-										).format("h:mm:ss a")}
+										{moment(item?.consultationTime).format(
+											"h:mm:ss a"
+										)}
 									</small>
 								</div>
 							}
 							description={
 								<div>
 									<p className="m-0">
-										{item?.description?.length >
-										150
-											? item?.description.substring(
-													150
-											  ) + "..."
+										{item?.description?.length > 150
+											? item?.description.substring(150) +
+											  "..."
 											: item?.description}
 									</p>
 									<small>
 										Health Worker:
-										{item?.healthWorker}
+										{`${item?.healthWorker?.fname} ${item?.healthWorker?.mname} ${item?.healthWorker?.lname} `}
 									</small>
 
 									<div className="flex">
 										<small>
 											Slot:
-											{` ${
-												item?.nextSlotToGive -
-												1
-											}/${item?.numberOfSlot}`}
+											{` ${item?.nextSlotToGive - 1}/${
+												item?.numberOfSlot
+											}`}
 										</small>
 									</div>
 								</div>

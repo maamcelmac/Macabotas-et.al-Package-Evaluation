@@ -69,7 +69,7 @@ export interface Schedule {
 	type: string;
 	title: string;
 	description: string;
-	healthWorker: string;
+	healthWorker: any;
 	numberOfSlot: number;
 	consultationDate: any | moment.Moment;
 	consultationTime: any | moment.Moment;

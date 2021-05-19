@@ -54,7 +54,10 @@ const ConsulationsPage: React.FC = () => {
 				}
 			>
 				<Skeleton loading={schedules?.loading}>
-					<SchedulesTable data={schedules?.schedules} />
+					<SchedulesTable
+						data={schedules?.schedules}
+						userType="admin"
+					/>
 				</Skeleton>
 			</Card>
 		</div>

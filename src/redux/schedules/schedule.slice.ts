@@ -4,6 +4,7 @@ import axios from "axios";
 import { AppThunk } from "../store";
 import { errorCatch } from "../utils";
 import moment from "moment";
+import { Schedule } from "../../types/Interfaces";
 export const ScheduleSlice = createSlice({
 	name: "schedules",
 	initialState: {
@@ -11,7 +12,7 @@ export const ScheduleSlice = createSlice({
 		schedules: [],
 		error: null,
 		current: null,
-	},
+	} as { loading: boolean; schedules: Schedule[]; error: any; current: any },
 	reducers: {
 		scheduleLoading: (state) => {
 			state.loading = true;
@@ -32,6 +33,7 @@ export const ScheduleSlice = createSlice({
 			state.loading = false;
 			state.schedules = action.payload;
 		},
+
 		deleteScheduleSuccess: (state, action) => {
 			state.loading = false;
 			state.schedules = remove(state.schedules, action.payload);
@@ -69,10 +71,9 @@ export const createSchedule = (
 	}
 };
 
-export const getSchedules = (
-	userType: string = "patient",
-	patientId?: string
-): AppThunk => async (dispatch) => {
+export const getSchedules = (userType: string = "patient"): AppThunk => async (
+	dispatch
+) => {
 	dispatch(scheduleLoading());
 	try {
 		let req;

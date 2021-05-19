@@ -23,41 +23,42 @@ const AppointmentTable: React.FC<Props> = ({ data }) => {
 			dataIndex: "patient",
 			key: "patient",
 			render: (val) => {
-				return `${val} - ${val.brgy} ${val.city_municipality}, ${val.province}`;
+				return `${val?.address} - ${val.brgy} ${val.city_municipality}, ${val.province}`;
 			},
 		},
 		{
 			title: "Contact #",
 			dataIndex: "patient",
 			key: "patient",
-			render: (val) => val.phoneNumber,
+			render: (val) => val?.phoneNumber,
 		},
 
 		{
 			title: "Consultation",
-			dataIndex: "consultation",
-			key: "consultation",
-			render: (val) => val.type,
+			dataIndex: "schedule",
+			key: "schedule",
+			render: (val) => val?.type,
 		},
 		{
-			title: "Consultation",
-			dataIndex: "consultation",
-			key: "consultation",
-			render: (val) => val.title,
+			title: "Consultation Title",
+			dataIndex: "schedule",
+			key: "schedule",
+			render: (val) => val?.title,
 		},
 		{
 			title: "Schedule",
-			dataIndex: "consultation",
-			key: "consultation",
+			dataIndex: "schedule",
+			key: "schedule",
 			render: (val) =>
-				`${moment(val.consultationDate).format(
+				`${moment(val?.consultationDate).format(
 					"MMMM DD, YYYY"
-				)} ${moment(val.consultationTime).format("h:mm:ss a")}`,
+				)} ${moment(val?.consultationTime).format("h:mm:ss a")}`,
 		},
 		{
 			title: "Appointment Date",
-			dataIndex: "appointmentDate",
-			key: "appointmentDate",
+			dataIndex: "createdAt",
+			key: "createdAt",
+			render: (val) => moment(val).format("MMMM DD, YYYY"),
 		},
 		{
 			title: "Appointment Status",

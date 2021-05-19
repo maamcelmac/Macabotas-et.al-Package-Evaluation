@@ -2,38 +2,35 @@ import React from "react";
 import { Table } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import { Appointment, PatientInfo } from "../../../types/Interfaces";
-import QueueManage from "./queue-management.component";
-interface Queue {
-	patient: PatientInfo;
-	appointment: Appointment;
-}
+
 interface Props {
-	data: Queue[];
+	data: Appointment[];
 }
 
 const AppointmentTable: React.FC<Props> = ({ data }) => {
-	const columns: ColumnsType<Queue> = [
+	const columns: ColumnsType<Appointment> = [
 		{
 			title: "Full Name",
 			dataIndex: "patient",
 			key: "patient",
 			render: (val) => {
-				return `${val.fname} ${val.mname} ${val.lname}`;
+				return `${val?.fname} ${val?.mname} ${val?.lname}`;
 			},
 		},
 		{
 			title: "Queue Number",
-			dataIndex: "appointment",
-			key: "appointment",
-			render: (val) => {
-				return `${val.queueNumber}`;
-			},
+			dataIndex: "queueNumber",
+			key: "queueNumber",
 		},
 	];
 
 	return (
-		<div className="flex">
-			<Table<Queue> dataSource={data} columns={columns} />
+		<div className="width-100">
+			<Table<Appointment>
+				rowKey="_id"
+				dataSource={data && data}
+				columns={columns}
+			/>
 		</div>
 	);
 };

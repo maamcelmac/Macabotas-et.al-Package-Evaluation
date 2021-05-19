@@ -24,15 +24,11 @@ const ConsultationList: React.FC<Props> = ({ data }) => {
 									</p>
 									<small>
 										{moment(
-											item?.schedule
-												?.consultationDate
-										).format(
-											"MMMM DD, YYYY"
-										)}{" "}
+											item?.schedule?.consultationDate
+										).format("MMMM DD, YYYY")}{" "}
 										-{" "}
 										{moment(
-											item?.schedule
-												?.consultationTime
+											item?.schedule?.consultationTime
 										).format("h:mm:ss a")}
 									</small>
 								</div>
@@ -40,17 +36,16 @@ const ConsultationList: React.FC<Props> = ({ data }) => {
 							description={
 								<div>
 									<p className="m-0">
-										{item?.schedule?.description
-											?.length > 150
+										{item?.schedule?.description?.length >
+										150
 											? item?.schedule?.description.substring(
 													150
 											  ) + "..."
-											: item?.schedule
-													?.description}
+											: item?.schedule?.description}
 									</p>
 									<small>
 										Health Worker:
-										{item?.schedule?.healthWorker}
+										{`${item?.schedule?.healthWorker?.fname} ${item?.schedule?.healthWorker?.mname} ${item?.schedule?.healthWorker?.lname}`}
 									</small>
 									<br />
 									<label className="text-green ">

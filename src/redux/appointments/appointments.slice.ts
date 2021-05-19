@@ -12,6 +12,7 @@ export const Appointments = createSlice({
 		error: null,
 		current: null,
 		patientAppointments: [],
+		consultedPatients: 0,
 	},
 	reducers: {
 		appointmentLoading: (state) => {
@@ -40,6 +41,10 @@ export const Appointments = createSlice({
 		updateAppointmentSuccess: (state, action) => {
 			state.loading = false;
 			state.appointments = update(state.appointments, action.payload);
+		},
+		getConsultedPatientsSuccess: (state, action) => {
+			state.loading = false;
+			state.consultedPatients = action.payload;
 		},
 		deleteAppointmentSuccess: (state, action) => {
 			state.loading = false;
@@ -71,6 +76,26 @@ export const getAppointments = (
 		}
 	} catch (error) {
 		errorCatch(error, "Error loading appointments!");
+		dispatch(appointmentError(error));
+	}
+};
+
+export const getConsultedPatients = (): AppThunk => async (dispatch) => {
+	dispatch(appointmentLoading());
+	try {
+		const req = await axios.get(
+			`/appointments/?status=true&appointmentStatus=Attended`
+		);
+		const res = await req.data;
+		if (res.success) {
+			setTimeout(() => {
+				dispatch(getConsultedPatientsSuccess(res.data?.length));
+			}, 500);
+		} else {
+			throw Error;
+		}
+	} catch (error) {
+		errorCatch(error, "Error consulted patients!");
 		dispatch(appointmentError(error));
 	}
 };
@@ -152,27 +177,23 @@ export const getAppointmentsByPatient = (
 	}
 };
 
-export const updateAppointment = (
-	id: string,
-	payload: any,
-	callback: () => void
-): AppThunk => async (dispatch) => {
+export const updateAppointment = (id: string, payload: any): AppThunk => async (
+	dispatch
+) => {
 	dispatch(appointmentLoading());
 	try {
-		const req = await axios.put(`/patients/${id}`, payload);
-
+		const req = await axios.put(`/appointments/${id}`, payload);
 		const res = await req.data;
 
 		if (res.success) {
 			setTimeout(() => {
 				dispatch(updateAppointmentSuccess(res.data));
-				callback();
 			}, 500);
 		} else {
 			throw Error;
 		}
 	} catch (error) {
-		errorCatch(error, "Error deleting appointment!");
+		errorCatch(error, "Error updating appointment!");
 		dispatch(appointmentError(error));
 	}
 };
@@ -217,6 +238,7 @@ export const {
 	updateAppointmentSuccess,
 	createAppointmentSuccess,
 	getAppointmentByPatientSuccess,
+	getConsultedPatientsSuccess,
 } = Appointments.actions;
 
 export default Appointments.reducer;

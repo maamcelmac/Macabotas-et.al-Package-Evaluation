@@ -9,11 +9,13 @@ import {
 } from "../../../redux/schedules/schedule.slice";
 import { Confirmation, notify } from "../../global/alerts/alerts.component";
 import { useAppDispatch } from "../../../redux/hooks";
+import { updateSchedule } from "../../../redux/schedules/schedule.slice";
 interface Props {
 	data: Schedule[];
+	userType?: string;
 }
 
-const ScheduleTable: React.FC<Props> = ({ data }) => {
+const ScheduleTable: React.FC<Props> = ({ data, userType }) => {
 	const dispatch = useAppDispatch();
 	const columns: ColumnsType<Schedule> = [
 		{
@@ -61,44 +63,82 @@ const ScheduleTable: React.FC<Props> = ({ data }) => {
 		},
 		{
 			title: "Action",
-			render: (row): JSX.Element => {
-				return (
-					<div className="flex">
-						<Button
-							className="mr-half"
-							size="small"
-							onClick={() => {
-								dispatch(setCurrent(row));
-							}}
-						>
-							Edit
-						</Button>
-						<Confirmation
-							confirmFn={(): void => {
-								dispatch(
-									deleteSchedule(row._id, () => {
-										notify(
-											"Consulatation schedule deleted!",
-											"success"
-										);
-									})
-								);
-							}}
-							title="Click ok to delete this schedule"
-						>
-							<Button size="small" danger>
-								Delete
+			render: (row): JSX.Element | null => {
+				if (userType === "admin") {
+					return (
+						<div className="flex">
+							{row?.startStatus === "Pending" &&
+								row?.isStarted === false && (
+									<Button
+										type="primary"
+										className="mr-half"
+										size="small"
+										onClick={() => {
+											if (row._id) {
+												dispatch(
+													updateSchedule(
+														row._id,
+														{
+															startStatus:
+																"Started",
+															isStarted: true,
+															currentNumber: 1,
+														},
+														() => {
+															notify(
+																"Consultation Started!",
+																"success"
+															);
+														}
+													)
+												);
+											} else {
+												notify(
+													"Error starting consultation, Please refresh the page!",
+													"error"
+												);
+											}
+										}}
+									>
+										Start
+									</Button>
+								)}
+							<Button
+								className="mr-half"
+								size="small"
+								onClick={() => {
+									dispatch(setCurrent(row));
+								}}
+							>
+								Edit
 							</Button>
-						</Confirmation>
-					</div>
-				);
+							<Confirmation
+								confirmFn={(): void => {
+									dispatch(
+										deleteSchedule(row._id, () => {
+											notify(
+												"Consulatation schedule deleted!",
+												"success"
+											);
+										})
+									);
+								}}
+								title="Click ok to delete this schedule"
+							>
+								<Button size="small" danger>
+									Delete
+								</Button>
+							</Confirmation>
+						</div>
+					);
+				} else {
+					return <div />;
+				}
 			},
 		},
 	];
 
-	return (
-		<Table<Schedule> rowKey="_id" dataSource={data} columns={columns} />
-	);
+	return <Table<Schedule> rowKey="_id" dataSource={data} columns={columns} />;
 };
 
 export default ScheduleTable;
