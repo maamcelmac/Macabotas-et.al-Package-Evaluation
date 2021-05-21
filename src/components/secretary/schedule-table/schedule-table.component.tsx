@@ -10,6 +10,7 @@ import {
 import { Confirmation, notify } from "../../global/alerts/alerts.component";
 import { useAppDispatch } from "../../../redux/hooks";
 import { updateSchedule } from "../../../redux/schedules/schedule.slice";
+import { useHistory } from "react-router-dom";
 interface Props {
 	data: Schedule[];
 	userType?: string;
@@ -17,6 +18,7 @@ interface Props {
 
 const ScheduleTable: React.FC<Props> = ({ data, userType }) => {
 	const dispatch = useAppDispatch();
+	const history = useHistory();
 	const columns: ColumnsType<Schedule> = [
 		{
 			title: "Consultation",
@@ -132,7 +134,28 @@ const ScheduleTable: React.FC<Props> = ({ data, userType }) => {
 						</div>
 					);
 				} else {
-					return <div />;
+					if (!row?._id) {
+						notify(
+							"Error viewing patients, Please refresh the page!",
+							"error"
+						);
+
+						return null;
+					} else {
+						return (
+							<Button
+								size="small"
+								type="primary"
+								onClick={() => {
+									history.push(
+										`/doctor/schedules/${row?._id}`
+									);
+								}}
+							>
+								View Patients
+							</Button>
+						);
+					}
 				}
 			},
 		},

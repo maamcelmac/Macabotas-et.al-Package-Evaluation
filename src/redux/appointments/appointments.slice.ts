@@ -3,8 +3,9 @@ import { remove, update, add } from "../utils";
 import axios from "axios";
 import { AppThunk } from "../store";
 import { errorCatch } from "../utils";
+import { Appointment } from "../../types/Interfaces";
 
-export const Appointments = createSlice({
+export const AppointmentsSlice = createSlice({
 	name: "appointments",
 	initialState: {
 		loading: false,
@@ -13,6 +14,13 @@ export const Appointments = createSlice({
 		current: null,
 		patientAppointments: [],
 		consultedPatients: 0,
+	} as {
+		loading: boolean;
+		appointments: Appointment[];
+		error: any;
+		current: any;
+		patientAppointments: any;
+		consultedPatients: number;
 	},
 	reducers: {
 		appointmentLoading: (state) => {
@@ -177,6 +185,28 @@ export const getAppointmentsByPatient = (
 	}
 };
 
+export const getAppointmentsBySchedule = (
+	scheduleId: string
+): AppThunk => async (dispatch) => {
+	dispatch(appointmentLoading());
+	try {
+		const req = await axios.get(`/appointments/?schedule=${scheduleId}`);
+
+		const res = await req.data;
+		console.log(res?.data);
+		if (res.success) {
+			setTimeout(() => {
+				dispatch(getAppointmentsSuccess(res.data));
+			}, 500);
+		} else {
+			throw Error;
+		}
+	} catch (error) {
+		errorCatch(error, "Error retrieving schedules!");
+		dispatch(appointmentError(error));
+	}
+};
+
 export const updateAppointment = (id: string, payload: any): AppThunk => async (
 	dispatch
 ) => {
@@ -239,6 +269,6 @@ export const {
 	createAppointmentSuccess,
 	getAppointmentByPatientSuccess,
 	getConsultedPatientsSuccess,
-} = Appointments.actions;
+} = AppointmentsSlice.actions;
 
-export default Appointments.reducer;
+export default AppointmentsSlice.reducer;

@@ -1,14 +1,24 @@
-import React from "react";
-import { Table } from "antd";
+import React, { useEffect } from "react";
+import { Table, Button } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import { Appointment } from "../../../types/Interfaces";
 import moment from "moment";
+import { useHistory } from "react-router-dom";
+import { notify } from "../../global/alerts/alerts.component";
 
 interface Props {
 	data: Appointment[];
+	isDoctor?: boolean;
+	scheduleType?: string;
 }
 
-const AppointmentTable: React.FC<Props> = ({ data }) => {
+const AppointmentTable: React.FC<Props> = ({
+	data,
+	isDoctor = false,
+	scheduleType = "",
+}) => {
+	const history = useHistory();
+
 	const columns: ColumnsType<Appointment> = [
 		{
 			title: "Full Name",
@@ -66,8 +76,59 @@ const AppointmentTable: React.FC<Props> = ({ data }) => {
 			key: "appointmentStatus",
 		},
 	];
+	if (isDoctor) {
+		columns.push({
+			title: "Action",
+			render: (row) => {
+				return (
+					<Button
+						type="primary"
+						onClick={() => {
+							if (scheduleType !== "" && row?.patient?._id) {
+								let url;
 
-	return <Table<Appointment> dataSource={data} columns={columns} />;
+								if (scheduleType === "Family Planning") {
+									url = "family-planning";
+								} else if (
+									scheduleType ===
+									"Obstetric and Gynecological"
+								) {
+									url = "obstetric";
+								} else if (
+									scheduleType === "Individual Treatment"
+								) {
+									url = "individual-treatment";
+								} else if (
+									scheduleType ===
+									"Cancer Control and Prevention Program"
+								) {
+									url = "cancer-control";
+								} else if (scheduleType === "Nutritionist") {
+									url = "nutritionist";
+								}
+
+								history.push(
+									`/doctor/forms/${url}/${row?._id}`
+								);
+							} else {
+								notify(
+									"Error viewing patient consultation form, Please refresh the page and try again!",
+									"error"
+								);
+							}
+						}}
+					>
+						{" "}
+						View Patient Form{" "}
+					</Button>
+				);
+			},
+		});
+	}
+
+	return (
+		<Table<Appointment> rowKey="_id" dataSource={data} columns={columns} />
+	);
 };
 
 export default AppointmentTable;

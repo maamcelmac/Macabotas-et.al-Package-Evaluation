@@ -34,6 +34,11 @@ export const ScheduleSlice = createSlice({
 			state.schedules = action.payload;
 		},
 
+		getOneScheduleSuccess: (state, action) => {
+			state.loading = false;
+			state.current = action.payload;
+		},
+
 		deleteScheduleSuccess: (state, action) => {
 			state.loading = false;
 			state.schedules = remove(state.schedules, action.payload);
@@ -91,6 +96,29 @@ export const getSchedules = (userType: string = "patient"): AppThunk => async (
 		if (res.success) {
 			setTimeout(() => {
 				dispatch(getScheduleSuccess(res.data));
+			}, 500);
+		} else {
+			throw Error;
+		}
+	} catch (error) {
+		errorCatch(error, "Error retrieving schedule!");
+		dispatch(scheduleError(error));
+	}
+};
+
+export const getOneSchedule = (scheduleId: string): AppThunk => async (
+	dispatch
+) => {
+	dispatch(scheduleLoading());
+	try {
+		let req;
+
+		req = await axios.get(`/schedules/?_id=${scheduleId}`);
+		const res = await req.data;
+
+		if (res.success) {
+			setTimeout(() => {
+				dispatch(getOneScheduleSuccess(res.data[0]));
 			}, 500);
 		} else {
 			throw Error;
@@ -187,6 +215,7 @@ export const {
 	setCurrentSchedule,
 	updateScheduleSuccess,
 	getSchedulesByDoctorSuccess,
+	getOneScheduleSuccess,
 } = ScheduleSlice.actions;
 
 export default ScheduleSlice.reducer;

@@ -13,9 +13,8 @@ const ConsulationsPage: React.FC = () => {
 
 	const [editState, setEditState] = useState<boolean>(false);
 	useEffect(() => {
-		if (!currentUser) return;
+		if (!currentUser?._id) return;
 
-		alert(currentUser?._id);
 		dispatch(getSchedulesByDoctor(currentUser?._id));
 	}, [dispatch, currentUser]);
 

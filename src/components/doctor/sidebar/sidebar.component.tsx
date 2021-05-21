@@ -17,16 +17,11 @@ const Sidebar: React.FC = () => {
 				mode="inline"
 				theme="dark"
 			>
-				<Menu.Item key="2" icon={<FormOutlined />}>
-					<NavLink to="/doctor/consultations/family-planning">
-						Consultations
-					</NavLink>
-				</Menu.Item>
-				<Menu.Item key="3" icon={<CalendarOutlined />}>
+				<Menu.Item key="1" icon={<CalendarOutlined />}>
 					<NavLink to="/doctor/schedules">Schedules</NavLink>
 				</Menu.Item>
 
-				<Menu.Item key="5" icon={<UsergroupAddOutlined />}>
+				<Menu.Item key="2" icon={<UsergroupAddOutlined />}>
 					<NavLink to="/doctor/patients">Patients</NavLink>
 				</Menu.Item>
 			</Menu>

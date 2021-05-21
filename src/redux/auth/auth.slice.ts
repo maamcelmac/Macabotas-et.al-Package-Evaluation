@@ -31,11 +31,11 @@ export const Auth = createSlice({
 		loginSuccess: (state, action) => {
 			if (action.payload?.otherResp[0] === "admin") {
 				localStorage.setItem("admin-token", action.payload?.token);
+			} else if (action.payload?.otherResp[0] === "patient") {
+				localStorage.setItem("patient-token", action.payload?.token);
 			} else {
-				localStorage.setItem(
-					"patient-token",
-					action.payload?.token
-				);
+				alert("doctor");
+				localStorage.setItem("doctor-token", action.payload?.token);
 			}
 			state.loading = false;
 			state.isAuthenticated = true;
@@ -72,12 +72,14 @@ export const login = (
 		} else if (type === "patient") {
 			req = await axios.post(`/auth/patient-login`, payload);
 		} else {
-			alert(type);
 			req = await axios.post(`/auth/doctor-login`, payload);
 		}
 		const res = await req.data;
+
+		console.log(req?.data);
 		if (res.success) {
 			setTimeout(() => {
+				console.log(res);
 				dispatch(loginSuccess(res));
 				callback();
 			}, 500);

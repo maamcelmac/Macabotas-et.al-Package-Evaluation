@@ -21,33 +21,6 @@ const ReportsPage = lazy(
 	() => import("../pages/secretary/reports/reports.page")
 );
 
-const FamilyPlanningForm = lazy(
-	() =>
-		import(
-			"../pages/secretary/consultation-forms/family-planning-form.page"
-		)
-);
-
-const ObstetricForm = lazy(
-	() => import("../pages/secretary/consultation-forms/obstetitric-form.page")
-);
-
-const CancerControlForm = lazy(
-	() =>
-		import(
-			"../pages/secretary/consultation-forms/cancer-control-form.page"
-		)
-);
-
-const IndividualFormPage = lazy(
-	() => import("../pages/secretary/consultation-forms/individual-form.page")
-);
-
-const NutritionistPage = lazy(
-	() =>
-		import("../pages/secretary/consultation-forms/nutritionist-form.page")
-);
-
 const DoctorsPage = lazy(
 	() => import("../pages/secretary/doctors/doctors.page")
 );
@@ -73,40 +46,13 @@ const SecretaryRoutes: React.FC = () => {
 							path="/admin/schedules"
 							component={SchedulesPage}
 						/>
-						<Route
-							path="/admin/doctors"
-							component={DoctorsPage}
-						/>
+						<Route path="/admin/doctors" component={DoctorsPage} />
 						<Route
 							path="/admin/patients"
 							component={PatientsPage}
 						/>
 
-						<Route
-							path="/admin/reports"
-							component={ReportsPage}
-						/>
-
-						<Route
-							path="/admin/forms/family-planning"
-							component={FamilyPlanningForm}
-						/>
-						<Route
-							path="/admin/forms/obstetric"
-							component={ObstetricForm}
-						/>
-						<Route
-							path="/admin/forms/cancer-control"
-							component={CancerControlForm}
-						/>
-						<Route
-							path="/admin/forms/individual-treatment"
-							component={IndividualFormPage}
-						/>
-						<Route
-							path="/admin/forms/nutritionist"
-							component={NutritionistPage}
-						/>
+						<Route path="/admin/reports" component={ReportsPage} />
 					</Switch>
 				</div>
 			</div>
