@@ -62,6 +62,7 @@ export interface Appointment {
 	appointmentStatus: string;
 	status: boolean;
 	createdAt: any;
+	remarks?: string;
 }
 
 export interface Schedule {
@@ -81,7 +82,7 @@ export interface Schedule {
 }
 
 export interface ConsultationFormProps {
-	onSubmit: (val: object) => void;
+	onSubmit?: (val: object) => void;
 	initialValues?: object;
 	userType?: string;
 }

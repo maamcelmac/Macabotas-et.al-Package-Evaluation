@@ -18,7 +18,7 @@ const ObstetricFormPage: React.FC = () => {
 		<div>
 			<Card
 				title={
-					<div className="flex-unwrap align-items-flex-center">
+					<div className="row align-items-flex-center">
 						{" "}
 						<Link to="/patients/consultations">
 							<ArrowLeftOutlined className="mr-1" />
@@ -42,13 +42,8 @@ const ObstetricFormPage: React.FC = () => {
 								currentUser._id,
 								val,
 								() => {
-									notify(
-										"Appointment created.",
-										"success"
-									);
-									history.push(
-										"/patients/my-schedules"
-									);
+									notify("Appointment created.", "success");
+									history.push("/patients/my-schedules");
 								}
 							)
 						);

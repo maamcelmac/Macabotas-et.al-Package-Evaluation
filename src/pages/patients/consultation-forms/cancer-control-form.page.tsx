@@ -21,7 +21,7 @@ const CancerControlFormPage: React.FC = () => {
 			<div>
 				<Card
 					title={
-						<div className="flex-unwrap align-items-flex-center">
+						<div className="row align-items-flex-center">
 							{" "}
 							<Link to="/patients/consultations">
 								<ArrowLeftOutlined className="mr-1" />
@@ -34,8 +34,7 @@ const CancerControlFormPage: React.FC = () => {
 						initialValues={
 							currentUser && {
 								...currentUser?.cancerControl,
-								type:
-									"Cancer Control and Prevention Program",
+								type: "Cancer Control and Prevention Program",
 								...currentUser,
 							}
 						}
@@ -50,9 +49,7 @@ const CancerControlFormPage: React.FC = () => {
 											"Appointment created.",
 											"success"
 										);
-										history.push(
-											"/patients/my-schedules"
-										);
+										history.push("/patients/my-schedules");
 									}
 								)
 							);

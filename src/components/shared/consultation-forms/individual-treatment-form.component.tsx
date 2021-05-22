@@ -1,8 +1,9 @@
 import React from "react";
-import { Form, DatePicker, Button, Input, Radio } from "antd";
+import { Form, Button, Input, Radio } from "antd";
 import { ConsultationFormProps } from "../../../types/Interfaces";
 import PersonalDataForm from "./personal-data-form.component";
 
+const { TextArea } = Input;
 const IndividualTreatmentForm: React.FC<ConsultationFormProps> = ({
 	onSubmit,
 	initialValues,
@@ -11,7 +12,9 @@ const IndividualTreatmentForm: React.FC<ConsultationFormProps> = ({
 	const [form] = Form.useForm();
 
 	const onFinish = (val: object) => {
-		onSubmit(val);
+		if (onSubmit) {
+			onSubmit(val);
+		}
 	};
 
 	return (
@@ -94,9 +97,7 @@ const IndividualTreatmentForm: React.FC<ConsultationFormProps> = ({
 						]}
 					>
 						<Radio.Group>
-							<Radio.Button value="Member">
-								Member
-							</Radio.Button>
+							<Radio.Button value="Member">Member</Radio.Button>
 							<Radio.Button value="Dependent">
 								Dependent
 							</Radio.Button>
@@ -199,13 +200,31 @@ const IndividualTreatmentForm: React.FC<ConsultationFormProps> = ({
 					>
 						<Input />
 					</Form.Item>
+
+					{userType === "doctor" && (
+						<Form.Item
+							label="Remarks "
+							name="remarks"
+							className="col-12 col-md-12 col-sm-12 p-half"
+							rules={[
+								{
+									required: true,
+									message: "Please fill out this field!",
+								},
+							]}
+						>
+							<TextArea rows={5} />
+						</Form.Item>
+					)}
 				</div>
 
-				<div className="justify-content-center">
-					<Button type="primary" htmlType="submit">
-						Submit
-					</Button>
-				</div>
+				{onSubmit && (
+					<div className="justify-content-center">
+						<Button type="primary" htmlType="submit">
+							Submit
+						</Button>
+					</div>
+				)}
 			</Form>
 		</div>
 	);

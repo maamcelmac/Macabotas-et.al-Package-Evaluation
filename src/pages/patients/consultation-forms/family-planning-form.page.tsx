@@ -21,7 +21,7 @@ const FamilyPlanningFormPage: React.FC = () => {
 			<div>
 				<Card
 					title={
-						<div className="flex-unwrap align-items-flex-center">
+						<div className="row align-items-flex-center">
 							{" "}
 							<Link to="/patients/consultations">
 								<ArrowLeftOutlined className="mr-1" />
@@ -49,9 +49,7 @@ const FamilyPlanningFormPage: React.FC = () => {
 											"Appointment created.",
 											"success"
 										);
-										history.push(
-											"/patients/my-schedules"
-										);
+										history.push("/patients/my-schedules");
 									}
 								)
 							);

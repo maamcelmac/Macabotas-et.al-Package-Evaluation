@@ -12,7 +12,9 @@ const IndividualTreatmentForm: React.FC<ConsultationFormProps> = ({
 	const [form] = Form.useForm();
 
 	const onFinish = (val: object) => {
-		onSubmit(val);
+		if (onSubmit) {
+			onSubmit(val);
+		}
 	};
 
 	return (
@@ -104,27 +106,31 @@ const IndividualTreatmentForm: React.FC<ConsultationFormProps> = ({
 					</Form.Item>
 				</div>
 
-				<div className="col-12 mt-2 mb-2">
-					<Form.Item
-						label="Diet Rx:"
-						name="dietRx"
-						className="col-12 col-md-12 col-sm-12 p-half mt-2 mb-2"
-						rules={[
-							{
-								required: true,
-								message: "Please fill out this field!",
-							},
-						]}
-					>
-						<TextArea rows={7} />
-					</Form.Item>
-				</div>
+				{userType === "doctor" && (
+					<div className="col-12 mt-2 mb-2">
+						<Form.Item
+							label="Diet Rx:"
+							name="remarks"
+							className="col-12 col-md-12 col-sm-12 p-half mt-2 mb-2"
+							rules={[
+								{
+									required: true,
+									message: "Please fill out this field!",
+								},
+							]}
+						>
+							<TextArea rows={5} />
+						</Form.Item>
+					</div>
+				)}
 
-				<div className="justify-content-center">
-					<Button type="primary" htmlType="submit">
-						Submit
-					</Button>
-				</div>
+				{onSubmit && (
+					<div className="justify-content-center">
+						<Button type="primary" htmlType="submit">
+							Submit
+						</Button>
+					</div>
+				)}
 			</Form>
 		</div>
 	);

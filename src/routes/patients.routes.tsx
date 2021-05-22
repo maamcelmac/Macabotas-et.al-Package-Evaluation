@@ -17,18 +17,14 @@ const MySchedulesPage = lazy(
 );
 const FamilyPlanningForm = lazy(
 	() =>
-		import(
-			"../pages/patients/consultation-forms/family-planning-form.page"
-		)
+		import("../pages/patients/consultation-forms/family-planning-form.page")
 );
 const ObstetricForm = lazy(
 	() => import("../pages/patients/consultation-forms/obstetitric-form.page")
 );
 const CancerControlForm = lazy(
 	() =>
-		import(
-			"../pages/patients/consultation-forms/cancer-control-form.page"
-		)
+		import("../pages/patients/consultation-forms/cancer-control-form.page")
 );
 const IndividualFormPage = lazy(
 	() => import("../pages/patients/consultation-forms/individual-form.page")
@@ -39,6 +35,37 @@ const NutritionistPage = lazy(
 
 const MyAccountPage = lazy(
 	() => import("../pages/patients/my-account/my-account.page")
+);
+
+const UpdateFamilyPlanningForm = lazy(
+	() =>
+		import(
+			"../pages/patients/update-consultation-forms/family-planning-form.page"
+		)
+);
+const UpdateObstetricForm = lazy(
+	() =>
+		import(
+			"../pages/patients/update-consultation-forms/obstetitric-form.page"
+		)
+);
+const UpdateCancerControlForm = lazy(
+	() =>
+		import(
+			"../pages/patients/update-consultation-forms/cancer-control-form.page"
+		)
+);
+const UpdateIndividualFormPage = lazy(
+	() =>
+		import(
+			"../pages/patients/update-consultation-forms/individual-form.page"
+		)
+);
+const UpdateNutritionistPage = lazy(
+	() =>
+		import(
+			"../pages/patients/update-consultation-forms/nutritionist-form.page"
+		)
 );
 
 const token = localStorage.getItem("patient-token");
@@ -112,6 +139,29 @@ const SecretaryRoutes: React.FC = () => {
 						path="/patients/consultations/nutritionist/:id"
 						component={NutritionistPage}
 					/>
+
+					<Route
+						path="/patients/consultation-form/family-planning/:id"
+						component={UpdateFamilyPlanningForm}
+					/>
+
+					<Route
+						path="/patients/consultation-form/obstetric/:id"
+						component={UpdateObstetricForm}
+					/>
+					<Route
+						path="/patients/consultation-form/cancer-control/:id"
+						component={UpdateCancerControlForm}
+					/>
+					<Route
+						path="/patients/consultation-form/individual-treatment/:id"
+						component={UpdateIndividualFormPage}
+					/>
+					<Route
+						path="/patients/consultation-form/nutritionist/:id"
+						component={UpdateNutritionistPage}
+					/>
+
 					<Route
 						path="/patients/consultations"
 						component={ConsultationsPage}

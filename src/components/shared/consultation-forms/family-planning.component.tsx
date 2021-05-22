@@ -12,6 +12,7 @@ import { SelectValue } from "antd/lib/select";
 import { ConsultationFormProps } from "../../../types/Interfaces";
 import PersonalDataForm from "./personal-data-form.component";
 const { Option } = Select;
+const { TextArea } = Input;
 
 const FamilyPlanningForm: React.FC<ConsultationFormProps> = ({
 	onSubmit,
@@ -27,7 +28,9 @@ const FamilyPlanningForm: React.FC<ConsultationFormProps> = ({
 	);
 
 	const onFinish = (val: object) => {
-		onSubmit(val);
+		if (onSubmit) {
+			onSubmit(val);
+		}
 	};
 
 	return (
@@ -67,8 +70,7 @@ const FamilyPlanningForm: React.FC<ConsultationFormProps> = ({
 						rules={[
 							{
 								required: true,
-								message:
-									"Please select if you have a 4Ps!",
+								message: "Please select if you have a 4Ps!",
 							},
 						]}
 					>
@@ -84,8 +86,7 @@ const FamilyPlanningForm: React.FC<ConsultationFormProps> = ({
 						rules={[
 							{
 								required: true,
-								message:
-									"Please input no. of living children!",
+								message: "Please input no. of living children!",
 							},
 						]}
 					>
@@ -115,8 +116,7 @@ const FamilyPlanningForm: React.FC<ConsultationFormProps> = ({
 						rules={[
 							{
 								required: true,
-								message:
-									"Please input average monthly income!",
+								message: "Please input average monthly income!",
 							},
 						]}
 					>
@@ -132,8 +132,7 @@ const FamilyPlanningForm: React.FC<ConsultationFormProps> = ({
 						rules={[
 							{
 								required: true,
-								message:
-									"Please select type of client!",
+								message: "Please select type of client!",
 							},
 						]}
 					>
@@ -142,12 +141,8 @@ const FamilyPlanningForm: React.FC<ConsultationFormProps> = ({
 								setTypeOfClient(val)
 							}
 						>
-							<Option value="New Acceptor">
-								New Acceptor
-							</Option>
-							<Option value="Current User">
-								Current User
-							</Option>
+							<Option value="New Acceptor">New Acceptor</Option>
+							<Option value="Current User">Current User</Option>
 						</Select>
 					</Form.Item>
 
@@ -159,8 +154,7 @@ const FamilyPlanningForm: React.FC<ConsultationFormProps> = ({
 							rules={[
 								{
 									required: true,
-									message:
-										"Please select type of method!",
+									message: "Please select type of method!",
 								},
 							]}
 						>
@@ -214,9 +208,7 @@ const FamilyPlanningForm: React.FC<ConsultationFormProps> = ({
 							<Option value="Medical Condition">
 								Medical Condition
 							</Option>
-							<Option value="Side Effects">
-								Side Effects
-							</Option>
+							<Option value="Side Effects">Side Effects</Option>
 						</Select>
 					</Form.Item>
 
@@ -236,9 +228,7 @@ const FamilyPlanningForm: React.FC<ConsultationFormProps> = ({
 							<Select>
 								<Option value="COC">COC</Option>
 								<Option value="POP">POP</Option>
-								<Option value="Injectable">
-									Injectable
-								</Option>
+								<Option value="Injectable">Injectable</Option>
 								<Option value="Implant">Implant</Option>
 								<Option value="IUD-Interval">
 									IUD-Interval
@@ -273,10 +263,10 @@ const FamilyPlanningForm: React.FC<ConsultationFormProps> = ({
 
 					<i>
 						{" "}
-						This is to certify that the
-						Physician/Nurse/Midwife of the clinic has fully
-						explained to me the different methods available in
-						family planning and I freely choose the{" "}
+						This is to certify that the Physician/Nurse/Midwife of
+						the clinic has fully explained to me the different
+						methods available in family planning and I freely choose
+						the{" "}
 					</i>
 
 					<div className="flex">
@@ -294,9 +284,7 @@ const FamilyPlanningForm: React.FC<ConsultationFormProps> = ({
 							<Select>
 								<Option value="COC">COC</Option>
 								<Option value="POP">POP</Option>
-								<Option value="Injectable">
-									Injectable
-								</Option>
+								<Option value="Injectable">Injectable</Option>
 								<Option value="Implant">Implant</Option>
 								<Option value="IUD-Interval">
 									IUD-Interval
@@ -314,11 +302,29 @@ const FamilyPlanningForm: React.FC<ConsultationFormProps> = ({
 							</Select>
 						</Form.Item>
 
-						<div className="flex justify-content-center">
-							<Button type="primary" htmlType="submit">
-								Submit{" "}
-							</Button>
-						</div>
+						{userType === "doctor" && (
+							<Form.Item
+								label="Remarks "
+								name="remarks"
+								className="col-12 col-md-12 col-sm-12 p-half"
+								rules={[
+									{
+										required: true,
+										message: "Please fill out this field!",
+									},
+								]}
+							>
+								<TextArea rows={5} />
+							</Form.Item>
+						)}
+
+						{onSubmit && (
+							<div className="flex justify-content-center">
+								<Button type="primary" htmlType="submit">
+									Submit{" "}
+								</Button>
+							</div>
+						)}
 					</div>
 				</div>
 			</Form>
@@ -479,14 +485,8 @@ const PhysicalExamination: React.FC = () => {
 				>
 					<Select>
 						<Option value="Normal"> Normal</Option>
-						<Option value="Abdominal mass">
-							{" "}
-							Abdominal mass
-						</Option>
-						<Option value="Varicosities">
-							{" "}
-							Varicosities
-						</Option>
+						<Option value="Abdominal mass"> Abdominal mass</Option>
+						<Option value="Varicosities"> Varicosities</Option>
 					</Select>
 				</Form.Item>
 
@@ -504,10 +504,7 @@ const PhysicalExamination: React.FC = () => {
 					<Select>
 						<Option value="Normal"> Normal</Option>
 						<Option value="Edema"> Edema</Option>
-						<Option value="Varicosities">
-							{" "}
-							Varicosities
-						</Option>
+						<Option value="Varicosities"> Varicosities</Option>
 					</Select>
 				</Form.Item>
 
@@ -539,8 +536,7 @@ const PhysicalExamination: React.FC = () => {
 						</Option>
 						<Option value="Cervical Abnormalities - inflammation or erosion">
 							{" "}
-							Cervical Abnormalities - inflammation or
-							erosion
+							Cervical Abnormalities - inflammation or erosion
 						</Option>
 						<Option value="Cervical Abnormalities - bloody discharge">
 							{" "}
@@ -903,9 +899,7 @@ const ObstetricalHistory: React.FC = () => (
 			>
 				<Select>
 					<Option value="Vaginal"> Vaginal</Option>
-					<Option value="Cesarean Section">
-						Cesarean Section
-					</Option>
+					<Option value="Cesarean Section">Cesarean Section</Option>
 				</Select>
 			</Form.Item>
 

@@ -8,8 +8,8 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 
 if (process.env.NODE_ENV === "development") {
-	// axios.defaults.baseURL = "https://tosia.xyz/health-center/api/";
-	axios.defaults.baseURL = "http://localhost:5001/api/";
+	axios.defaults.baseURL = "https://tosia.xyz/health-center/api/";
+	// axios.defaults.baseURL = "http://localhost:5001/api/";
 } else {
 	axios.defaults.baseURL = "https://tosia.xyz/health-center/api/";
 }

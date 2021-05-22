@@ -33,7 +33,7 @@ const AppointmentTable: React.FC<Props> = ({
 			dataIndex: "patient",
 			key: "patient",
 			render: (val) => {
-				return `${val?.address} - ${val.brgy} ${val.city_municipality}, ${val.province}`;
+				return `${val?.address}, ${val.province}`;
 			},
 		},
 		{
@@ -75,6 +75,11 @@ const AppointmentTable: React.FC<Props> = ({
 			dataIndex: "appointmentStatus",
 			key: "appointmentStatus",
 		},
+		{
+			title: "Queue Number",
+			dataIndex: "queueNumber",
+			key: "queueNumber",
+		},
 	];
 	if (isDoctor) {
 		columns.push({
@@ -82,6 +87,7 @@ const AppointmentTable: React.FC<Props> = ({
 			render: (row) => {
 				return (
 					<Button
+						size="small"
 						type="primary"
 						onClick={() => {
 							if (scheduleType !== "" && row?.patient?._id) {
@@ -118,8 +124,7 @@ const AppointmentTable: React.FC<Props> = ({
 							}
 						}}
 					>
-						{" "}
-						View Patient Form{" "}
+						View Form
 					</Button>
 				);
 			},

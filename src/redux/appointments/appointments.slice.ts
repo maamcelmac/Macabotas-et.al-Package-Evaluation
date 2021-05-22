@@ -4,6 +4,7 @@ import axios from "axios";
 import { AppThunk } from "../store";
 import { errorCatch } from "../utils";
 import { Appointment } from "../../types/Interfaces";
+import { notify } from "../../components/global/alerts/alerts.component";
 
 export const AppointmentsSlice = createSlice({
 	name: "appointments",
@@ -110,7 +111,7 @@ export const getConsultedPatients = (): AppThunk => async (dispatch) => {
 
 export const getOneAppointment = (
 	id: string,
-	callback: () => void
+	callback?: () => void
 ): AppThunk => async (dispatch) => {
 	dispatch(appointmentLoading());
 	try {
@@ -121,7 +122,9 @@ export const getOneAppointment = (
 		if (res.success) {
 			setTimeout(() => {
 				dispatch(getOneAppointmentSuccess(res.data));
-				callback();
+				if (callback) {
+					callback();
+				}
 			}, 500);
 		} else {
 			throw Error;
@@ -207,9 +210,11 @@ export const getAppointmentsBySchedule = (
 	}
 };
 
-export const updateAppointment = (id: string, payload: any): AppThunk => async (
-	dispatch
-) => {
+export const updateAppointment = (
+	id: string,
+	payload: any,
+	callback?: () => void
+): AppThunk => async (dispatch) => {
 	dispatch(appointmentLoading());
 	try {
 		const req = await axios.put(`/appointments/${id}`, payload);
@@ -218,6 +223,10 @@ export const updateAppointment = (id: string, payload: any): AppThunk => async (
 		if (res.success) {
 			setTimeout(() => {
 				dispatch(updateAppointmentSuccess(res.data));
+
+				if (callback) {
+					callback();
+				}
 			}, 500);
 		} else {
 			throw Error;

@@ -11,7 +11,9 @@ const PersonalDataForm: React.FC<ConsultationFormProps> = ({
 	const [form] = Form.useForm();
 
 	const onFinish = (val: any) => {
-		onSubmit(val);
+		if (onSubmit) {
+			onSubmit(val);
+		}
 	};
 
 	return (
@@ -62,15 +64,13 @@ const PersonalDataForm: React.FC<ConsultationFormProps> = ({
 						rules={[
 							{
 								required: true,
-								message:
-									"Please confirm your password!",
+								message: "Please confirm your password!",
 							},
 							({ getFieldValue }) => ({
 								validator(_, value) {
 									if (
 										!value ||
-										getFieldValue("password") ===
-											value
+										getFieldValue("password") === value
 									) {
 										return Promise.resolve();
 									}
@@ -163,12 +163,8 @@ const PersonalDataForm: React.FC<ConsultationFormProps> = ({
 						]}
 					>
 						<Radio.Group>
-							<Radio.Button value="Male">
-								Male
-							</Radio.Button>
-							<Radio.Button value="Female">
-								Female
-							</Radio.Button>
+							<Radio.Button value="Male">Male</Radio.Button>
+							<Radio.Button value="Female">Female</Radio.Button>
 						</Radio.Group>
 					</Form.Item>
 					<Form.Item

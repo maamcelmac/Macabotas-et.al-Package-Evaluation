@@ -14,20 +14,30 @@ const ConsultationSchedules: React.FC = () => {
 			const { _id } = currentUser;
 
 			if (!_id) return;
+			// setInterval(() => {
+			// 	dispatch(
+			// 		getAppointmentsByPatient(_id, () => {
+			// 			console.log("Schedules Loaded");
+			// 		})
+			// 	);
+			// }, 30000);
+
 			dispatch(
 				getAppointmentsByPatient(_id, () => {
 					console.log("Schedules Loaded");
 				})
 			);
+
+			return () => {
+				clearInterval();
+			};
 		}
 	}, [dispatch, currentUser]);
 
 	return (
 		<div>
 			<h3> My Appointments </h3>
-			<Skeleton loading={data?.loading}>
-				<SchedulesList data={data?.patientAppointments} />
-			</Skeleton>
+			<SchedulesList data={data?.patientAppointments} />
 		</div>
 	);
 };

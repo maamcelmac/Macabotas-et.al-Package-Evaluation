@@ -12,7 +12,9 @@ const ObstetricForm: React.FC<ConsultationFormProps> = ({
 	const [form] = Form.useForm();
 
 	const onFinish = (val: object) => {
-		onSubmit(val);
+		if (onSubmit) {
+			onSubmit(val);
+		}
 	};
 
 	return (
@@ -224,8 +226,7 @@ const ObstetricForm: React.FC<ConsultationFormProps> = ({
 							rules={[
 								{
 									required: true,
-									message:
-										"Please fill out this field!",
+									message: "Please fill out this field!",
 								},
 							]}
 						>
@@ -239,8 +240,7 @@ const ObstetricForm: React.FC<ConsultationFormProps> = ({
 							rules={[
 								{
 									required: true,
-									message:
-										"Please fill out this field!",
+									message: "Please fill out this field!",
 								},
 							]}
 						>
@@ -255,8 +255,7 @@ const ObstetricForm: React.FC<ConsultationFormProps> = ({
 							rules={[
 								{
 									required: true,
-									message:
-										"Please fill out this field!",
+									message: "Please fill out this field!",
 								},
 							]}
 						>
@@ -270,8 +269,7 @@ const ObstetricForm: React.FC<ConsultationFormProps> = ({
 							rules={[
 								{
 									required: true,
-									message:
-										"Please fill out this field!",
+									message: "Please fill out this field!",
 								},
 							]}
 						>
@@ -285,8 +283,7 @@ const ObstetricForm: React.FC<ConsultationFormProps> = ({
 							rules={[
 								{
 									required: true,
-									message:
-										"Please fill out this field!",
+									message: "Please fill out this field!",
 								},
 							]}
 						>
@@ -300,8 +297,7 @@ const ObstetricForm: React.FC<ConsultationFormProps> = ({
 							rules={[
 								{
 									required: true,
-									message:
-										"Please fill out this field!",
+									message: "Please fill out this field!",
 								},
 							]}
 						>
@@ -315,8 +311,7 @@ const ObstetricForm: React.FC<ConsultationFormProps> = ({
 							rules={[
 								{
 									required: true,
-									message:
-										"Please fill out this field!",
+									message: "Please fill out this field!",
 								},
 							]}
 						>
@@ -332,8 +327,7 @@ const ObstetricForm: React.FC<ConsultationFormProps> = ({
 							rules={[
 								{
 									required: true,
-									message:
-										"Please fill out this field!",
+									message: "Please fill out this field!",
 								},
 							]}
 						>
@@ -347,8 +341,7 @@ const ObstetricForm: React.FC<ConsultationFormProps> = ({
 							rules={[
 								{
 									required: true,
-									message:
-										"Please fill out this field!",
+									message: "Please fill out this field!",
 								},
 							]}
 						>
@@ -398,8 +391,7 @@ const ObstetricForm: React.FC<ConsultationFormProps> = ({
 							rules={[
 								{
 									required: true,
-									message:
-										"Please fill out this field!",
+									message: "Please fill out this field!",
 								},
 							]}
 						>
@@ -414,8 +406,7 @@ const ObstetricForm: React.FC<ConsultationFormProps> = ({
 							rules={[
 								{
 									required: true,
-									message:
-										"Please fill out this field!",
+									message: "Please fill out this field!",
 								},
 							]}
 						>
@@ -430,21 +421,38 @@ const ObstetricForm: React.FC<ConsultationFormProps> = ({
 							rules={[
 								{
 									required: true,
-									message:
-										"Please fill out this field!",
+									message: "Please fill out this field!",
 								},
 							]}
 						>
 							{" "}
 							<TextArea rows={4} />
 						</Form.Item>
+
+						{userType === "doctor" && (
+							<Form.Item
+								label="Remarks "
+								name="remarks"
+								className="col-12 col-md-12 col-sm-12 p-half mt-2"
+								rules={[
+									{
+										required: true,
+										message: "Please fill out this field!",
+									},
+								]}
+							>
+								<TextArea rows={5} />
+							</Form.Item>
+						)}
 					</div>
 
-					<div className="justify-content-center">
-						<Button type="primary" htmlType="submit">
-							Submit
-						</Button>
-					</div>
+					{onSubmit && (
+						<div className="justify-content-center">
+							<Button type="primary" htmlType="submit">
+								Submit
+							</Button>
+						</div>
+					)}
 				</div>
 			</Form>
 		</div>

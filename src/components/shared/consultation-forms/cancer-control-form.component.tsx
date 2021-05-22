@@ -12,7 +12,9 @@ const CancenControlForm: React.FC<ConsultationFormProps> = ({
 	const [form] = Form.useForm();
 
 	const onFinish = (val: object) => {
-		onSubmit(val);
+		if (onSubmit) {
+			onSubmit(val);
+		}
 	};
 
 	return (
@@ -67,9 +69,7 @@ const CancenControlForm: React.FC<ConsultationFormProps> = ({
 						]}
 					>
 						<Radio.Group>
-							<Radio.Button value="Regular">
-								Regular
-							</Radio.Button>
+							<Radio.Button value="Regular">Regular</Radio.Button>
 							<Radio.Button value="Irregular">
 								Irregular
 							</Radio.Button>
@@ -206,9 +206,7 @@ const CancenControlForm: React.FC<ConsultationFormProps> = ({
 						]}
 					>
 						<Radio.Group>
-							<Radio.Button value="Normal">
-								Normal
-							</Radio.Button>
+							<Radio.Button value="Normal">Normal</Radio.Button>
 							<Radio.Button value="Abnormal">
 								Abnormal
 							</Radio.Button>
@@ -227,9 +225,7 @@ const CancenControlForm: React.FC<ConsultationFormProps> = ({
 						]}
 					>
 						<Radio.Group>
-							<Radio.Button value="None">
-								None
-							</Radio.Button>
+							<Radio.Button value="None">None</Radio.Button>
 							<Radio.Button value="Abnormal">
 								Abnormal
 							</Radio.Button>
@@ -259,13 +255,32 @@ const CancenControlForm: React.FC<ConsultationFormProps> = ({
 						{" "}
 						<Input />
 					</Form.Item>
+
+					{userType === "doctor" && (
+						<Form.Item
+							label="Remarks "
+							name="remarks"
+							className="col-12 mt-2 col-md-12 col-sm-12 p-half"
+							rules={[
+								{
+									required: true,
+									message: "Please fill out this field!",
+								},
+							]}
+						>
+							{" "}
+							<TextArea rows={5} />
+						</Form.Item>
+					)}
 				</div>
 
-				<div className="justify-content-center">
-					<Button type="primary" htmlType="submit">
-						Submit
-					</Button>
-				</div>
+				{onSubmit && (
+					<div className="justify-content-center">
+						<Button type="primary" htmlType="submit">
+							Submit
+						</Button>
+					</div>
+				)}
 			</Form>
 		</div>
 	);
