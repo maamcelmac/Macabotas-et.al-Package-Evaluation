@@ -47,7 +47,10 @@ const LoginForm: React.FC = () => {
 						</div>
 						<div className="flex-column col-10 col-md-12">
 							<p className="navbar-title m-0 ">
-								E-Management System for Brgy Health Center
+								E-Management System
+							</p>{" "}
+							<p className="navbar-title m-0 ">
+								for Brgy Health Center
 							</p>{" "}
 						</div>
 					</div>

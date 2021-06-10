@@ -53,6 +53,12 @@ const Nutritionist: React.FC = () => {
 				<NutritionistForm
 					initialValues={{
 						...appointment?.consultationForm,
+						date:
+							appointment?.date &&
+							moment(
+								moment(appointment?.date).format("YYYY/MM/DD"),
+								"YYYY/MM/DD"
+							),
 					}}
 				/>
 			</Card>

@@ -5,6 +5,9 @@ import { register } from "../../../redux/auth/auth.slice";
 import { useAppDispatch } from "../../../redux/hooks";
 import { notify } from "../../../components/global/alerts/alerts.component";
 import { useHistory } from "react-router-dom";
+import { ArrowLeftOutlined } from "@ant-design/icons";
+import Logo from "../../../assets/logo.png";
+import { Link } from "react-router-dom";
 
 const RegistrationPage: React.FC = () => {
 	const dispatch = useAppDispatch();
@@ -25,12 +28,24 @@ const RegistrationPage: React.FC = () => {
 			<Card
 				title={
 					<div className="logo-container flex align-items-flex-center">
-						<p className="navbar-title m-0 ">
-							E-Management System
-						</p>
-						<p className="navbar-title m-0">
-							for Brgy Health Center
-						</p>
+						<div className="col-3 col-md-12 justify-content-space-between align-items-flex-center">
+							<Link to="/patient-login">
+								{" "}
+								<ArrowLeftOutlined /> Back{" "}
+							</Link>
+						</div>
+						<div className="flex align-items-flex-center col-9 col-md-12">
+							<img src={Logo} alt="Logo" width="65" height="65" />
+
+							<div>
+								<p className="navbar-title m-0 ">
+									E-Management System
+								</p>{" "}
+								<p className="navbar-title m-0 ">
+									for Brgy Health Center
+								</p>
+							</div>
+						</div>
 					</div>
 				}
 				className="col-5 col-md-8"
