@@ -3,13 +3,12 @@ import Spinner from "./components/hoc/spinner/spinner.component";
 import ErrorBoundary from "./components/hoc/error-boundary/error-boundary.component";
 import { Route, Switch } from "react-router-dom";
 import setAuthToken from "./utils/setAuthToken";
+import PatientLoginPage from "./pages/patients/login-form/login.page";
+
 const SecretaryRoutes = lazy(() => import("./routes/secretary.routes"));
 
 const LoginPage = lazy(() => import("./pages/secretary/login/login.page"));
 
-const PatientLoginPage = lazy(
-	() => import("./pages/patients/login-form/login.page")
-);
 const PatientRegistrationPage = lazy(
 	() => import("./pages/patients/registration-form/registration.page")
 );
