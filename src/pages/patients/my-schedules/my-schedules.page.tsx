@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import SchedulesList from "../../../components/patients/schedules-list/schedules-list.component";
 import { getAppointmentsByPatient } from "../../../redux/appointments/appointments.slice";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
-import { Skeleton } from "antd";
 
 const ConsultationSchedules: React.FC = () => {
 	const dispatch = useAppDispatch();

@@ -1,7 +1,7 @@
 import React, { lazy, Suspense, useEffect } from "react";
 import Spinner from "./components/hoc/spinner/spinner.component";
 import ErrorBoundary from "./components/hoc/error-boundary/error-boundary.component";
-import { Route, Switch, useLocation } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import setAuthToken from "./utils/setAuthToken";
 const SecretaryRoutes = lazy(() => import("./routes/secretary.routes"));
 
@@ -23,32 +23,22 @@ const App: React.FC = () => {
 	useEffect(() => {
 		setAuthToken(localStorage.getItem("atkn"));
 	}, []);
-	const location = useLocation();
 	return (
 		<>
 			<Suspense fallback={<Spinner />}>
 				<ErrorBoundary>
 					<Switch>
-						<Route
-							path="/admin"
-							component={SecretaryRoutes}
-						/>
+						<Route path="/admin" component={SecretaryRoutes} />
 						<Route path="/login" component={LoginPage} />
 
-						<Route
-							path="/patients"
-							component={PatientsRoutes}
-						/>
+						<Route path="/patients" component={PatientsRoutes} />
 						<Route
 							path="/patient-login"
 							component={PatientLoginPage}
 						/>
 
 						<Route path="/doctor" component={DoctorRoutes} />
-						<Route
-							path="/doctor-login"
-							component={DoctorLogin}
-						/>
+						<Route path="/doctor-login" component={DoctorLogin} />
 
 						<Route
 							path="/patient-registration"

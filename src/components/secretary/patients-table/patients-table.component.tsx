@@ -5,17 +5,14 @@ import { ColumnsType } from "antd/lib/table";
 import { Confirmation, notify } from "../../global/alerts/alerts.component";
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { deletePatient } from "../../../redux/patients/patients.slice";
-import { useHistory, useParams } from "react-router-dom";
 
 interface Props {
 	data: PatientInfo[];
 	isAppointment?: boolean;
 }
 
-const PatientTable: React.FC<Props> = ({ data, isAppointment = false }) => {
+const PatientTable: React.FC<Props> = ({ data }) => {
 	const dispatch = useAppDispatch();
-	const history = useHistory();
-	const { idParam } = useParams<{ idParam: string }>();
 	const currentUserRole = useAppSelector((state) => state?.auth?.user?.role);
 	const columns: ColumnsType<PatientInfo> = [
 		{

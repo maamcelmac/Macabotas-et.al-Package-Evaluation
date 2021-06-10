@@ -4,7 +4,6 @@ import axios from "axios";
 import { AppThunk } from "../store";
 import { errorCatch } from "../utils";
 import { Appointment } from "../../types/Interfaces";
-import { notify } from "../../components/global/alerts/alerts.component";
 
 export const AppointmentsSlice = createSlice({
 	name: "appointments",

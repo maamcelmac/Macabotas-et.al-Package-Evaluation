@@ -42,13 +42,14 @@ const LoginForm: React.FC = () => {
 			<Card
 				title={
 					<div className="logo-container flex align-items-flex-center">
-						<img src={Logo} alt="Logo" width="35" />
-						<p className="navbar-title m-0 ">
-							E-Management System
-						</p>
-						<p className="navbar-title m-0">
-							for Brgy Health Center
-						</p>
+						<div className="col-2 col-md-12 justify-content-center">
+							<img src={Logo} alt="Logo" width="65" height="65" />
+						</div>
+						<div className="flex-column col-10 col-md-12">
+							<p className="navbar-title m-0 ">
+								E-Management System for Brgy Health Center
+							</p>{" "}
+						</div>
 					</div>
 				}
 				className="col-5 col-md-8"

@@ -7,6 +7,7 @@ import { useParams, Link, useHistory } from "react-router-dom";
 import { notify } from "../../../components/global/alerts/alerts.component";
 import { PatientInfo } from "../../../types/Interfaces";
 import { ArrowLeftOutlined } from "@ant-design/icons";
+import moment from "moment";
 const NutritionistPage: React.FC = () => {
 	const params: string | any = useParams();
 	const dispatch = useAppDispatch();
@@ -33,6 +34,14 @@ const NutritionistPage: React.FC = () => {
 						initialValues={
 							currentUser && {
 								...currentUser?.nutritionist,
+								date:
+									currentUser?.date &&
+									moment(
+										moment(currentUser?.date).format(
+											"YYYY/MM/DD"
+										),
+										"YYYY/MM/DD"
+									),
 								type: "Nutritionist",
 								...currentUser,
 							}

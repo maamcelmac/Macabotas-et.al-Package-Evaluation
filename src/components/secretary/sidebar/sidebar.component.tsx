@@ -37,9 +37,9 @@ const Sidebar: React.FC = () => {
 				<Menu.Item key="5" icon={<UsergroupAddOutlined />}>
 					<NavLink to="/admin/patients">Patients</NavLink>
 				</Menu.Item>
-				<Menu.Item key="6" icon={<CopyOutlined />}>
+				{/* <Menu.Item key="6" icon={<CopyOutlined />}>
 					<NavLink to="/admin/reports">Reports</NavLink>
-				</Menu.Item>
+				</Menu.Item> */}
 			</Menu>
 		</div>
 	);

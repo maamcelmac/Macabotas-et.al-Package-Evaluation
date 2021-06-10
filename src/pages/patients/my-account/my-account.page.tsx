@@ -1,12 +1,10 @@
 import React from "react";
 import { Card, Spin } from "antd";
 import PersonalDataForm from "../../../components/shared/personal-data-form/personal-data-form.component";
-import { useAppSelector, useAppDispatch } from "../../../redux/hooks";
-import { notify } from "../../../components/global/alerts/alerts.component";
+import { useAppSelector } from "../../../redux/hooks";
 import { PatientInfo } from "../../../types/Interfaces";
 
 const CancerControlFormPage: React.FC = () => {
-	const dispatch = useAppDispatch();
 	const auth: PatientInfo | any = useAppSelector((state) => state.auth);
 	return !auth.loading ? (
 		<div>

@@ -34,7 +34,6 @@ export const Auth = createSlice({
 			} else if (action.payload?.otherResp[0] === "patient") {
 				localStorage.setItem("patient-token", action.payload?.token);
 			} else {
-				alert("doctor");
 				localStorage.setItem("doctor-token", action.payload?.token);
 			}
 			state.loading = false;

@@ -1,7 +1,7 @@
 import React from "react";
 import { Table } from "antd";
 import { ColumnsType } from "antd/lib/table";
-import { Appointment, PatientInfo } from "../../../types/Interfaces";
+import { Appointment } from "../../../types/Interfaces";
 
 interface Props {
 	data: Appointment[];

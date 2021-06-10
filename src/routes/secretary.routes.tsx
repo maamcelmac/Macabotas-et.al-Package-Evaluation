@@ -2,7 +2,6 @@ import React, { lazy } from "react";
 import { Switch, Route } from "react-router-dom";
 import Sidebar from "../components/secretary/sidebar/sidebar.component";
 import Navbar from "../components/secretary/navbar/navbar.component";
-import FamilyPlanningPage from "../pages/secretary/consultations/family-planning.page";
 
 const DashboardPage = lazy(
 	() => import("../pages/secretary/dashboard/dashboard.page")

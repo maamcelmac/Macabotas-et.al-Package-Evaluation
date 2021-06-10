@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Card, Skeleton } from "antd";
+import { Card } from "antd";
 import FamilyPlanningForm from "../../../components/shared/consultation-forms/family-planning.component";
 import {
 	getOneAppointment,

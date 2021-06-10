@@ -8,7 +8,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { useParams, useHistory } from "react-router-dom";
 import { notify } from "../../../components/global/alerts/alerts.component";
-
+import moment from "moment";
 const NutritionistPage: React.FC = () => {
 	const { id } = useParams<{ id: string }>();
 	const history = useHistory();
@@ -27,6 +27,14 @@ const NutritionistPage: React.FC = () => {
 						userType="doctor"
 						initialValues={{
 							...appointment?.consultationForm,
+							date:
+								appointment?.date &&
+								moment(
+									moment(appointment?.date).format(
+										"YYYY/MM/DD"
+									),
+									"YYYY/MM/DD"
+								),
 							remarks: appointment?.remarks,
 						}}
 						onSubmit={(val: object | any) => {

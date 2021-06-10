@@ -11,7 +11,7 @@ const ConsulationsPage: React.FC = () => {
 	const schedules = useAppSelector((state) => state.schedules);
 	const currentUser = useAppSelector((state) => state.auth.user);
 
-	const [editState, setEditState] = useState<boolean>(false);
+	const [editState] = useState<boolean>(false);
 	useEffect(() => {
 		if (!currentUser?._id) return;
 

@@ -1,10 +1,6 @@
 import React from "react";
 import { Menu } from "antd";
-import {
-	FormOutlined,
-	UsergroupAddOutlined,
-	CalendarOutlined,
-} from "@ant-design/icons";
+import { UsergroupAddOutlined, CalendarOutlined } from "@ant-design/icons";
 import { NavLink } from "react-router-dom";
 
 const Sidebar: React.FC = () => {

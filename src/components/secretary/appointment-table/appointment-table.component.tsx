@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Table, Button } from "antd";
 import { ColumnsType } from "antd/lib/table";
 import { Appointment } from "../../../types/Interfaces";
