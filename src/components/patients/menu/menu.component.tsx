@@ -35,15 +35,15 @@ const PatientMenu: React.FC<Props> = ({ visible, onClose }) => {
 						</NavLink>
 					</Menu.Item>
 					<Menu.Item key="3">
-						<NavLink to="/patients/my-account">
-							My Account
-						</NavLink>
+						<NavLink to="/patients/my-account">My Account</NavLink>
 					</Menu.Item>
 					<Menu.Item
 						key="4"
 						onClick={() => {
 							localStorage.removeItem("patient-token");
-							history.push("/patient-login");
+							setTimeout(() => {
+								history.push("/patient-login");
+							}, 1500);
 						}}
 					>
 						Logout

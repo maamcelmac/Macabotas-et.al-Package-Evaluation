@@ -8,10 +8,10 @@ import { notify } from "../../../components/global/alerts/alerts.component";
 import setAuthToken from "../../../utils/setAuthToken";
 import { useHistory } from "react-router-dom";
 
-const token = localStorage.getItem("admin-token");
 const LoginForm: React.FC = () => {
 	const dispatch = useAppDispatch();
 	const history = useHistory();
+	const token = localStorage.getItem("admin-token");
 
 	useEffect(() => {
 		if (token) {
@@ -23,7 +23,7 @@ const LoginForm: React.FC = () => {
 				})
 			);
 		}
-	}, [token, dispatch]);
+	}, [token, dispatch, history]);
 
 	const onFinish = (values: any) => {
 		dispatch(
