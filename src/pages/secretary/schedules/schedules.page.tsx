@@ -55,6 +55,7 @@ const ConsulationsPage: React.FC = () => {
 			>
 				<Skeleton loading={schedules?.loading}>
 					<SchedulesTable
+						forReport={false}
 						data={schedules?.schedules}
 						userType="admin"
 					/>

@@ -14,9 +14,10 @@ import { useHistory } from "react-router-dom";
 interface Props {
 	data: Schedule[];
 	userType?: string;
+	forReport?: boolean;
 }
 
-const ScheduleTable: React.FC<Props> = ({ data, userType }) => {
+const ScheduleTable: React.FC<Props> = ({ data, userType, forReport }) => {
 	const dispatch = useAppDispatch();
 	const history = useHistory();
 	const columns: ColumnsType<Schedule> = [
@@ -63,7 +64,10 @@ const ScheduleTable: React.FC<Props> = ({ data, userType }) => {
 			title: "Current Number",
 			dataIndex: "currentNumber",
 		},
-		{
+	];
+
+	if (!forReport) {
+		columns.push({
 			title: "Action",
 			render: (row): JSX.Element | null => {
 				if (userType === "admin") {
@@ -158,8 +162,8 @@ const ScheduleTable: React.FC<Props> = ({ data, userType }) => {
 					}
 				}
 			},
-		},
-	];
+		});
+	}
 
 	return <Table<Schedule> rowKey="_id" dataSource={data} columns={columns} />;
 };

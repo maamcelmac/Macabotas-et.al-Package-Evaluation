@@ -72,7 +72,7 @@ export const getAppointments = (
 	dispatch(appointmentLoading());
 	try {
 		const req = await axios.get(
-			`/appointments/?status=true&type=${type}&appointmentStatus=${status}`
+			`/appointments/?status=true&appointmentStatus=${status}`
 		);
 		const res = await req.data;
 		if (res.success) {

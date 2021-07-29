@@ -6,7 +6,14 @@ import { getConsultedPatients } from "../../../redux/appointments/appointments.s
 import { getSchedules } from "../../../redux/schedules/schedule.slice";
 import { getPatients } from "../../../redux/patients/patients.slice";
 
-const DasboardPage: React.FC = () => {
+
+interface Props {
+	forReport: boolean;
+
+}
+
+
+const DasboardPage: React.FC<Props> = ({ forReport }) => {
 	const dispatch = useAppDispatch();
 	const upcomingConsultation = useAppSelector(
 		(state) => state?.schedules?.schedules?.length
@@ -153,18 +160,20 @@ const DasboardPage: React.FC = () => {
 				</Col>
 			</Row>
 
-			{!!onGoingConsultation ? (
-				<Row gutter={16} className="mt-2">
-					{onGoingConsultation &&
-						onGoingConsultation?.map((sched: any) => (
-							<Col span={12}>
-								<QueueManage schedule={sched} />
-							</Col>
-						))}
-				</Row>
-			) : (
-				<div> Loading... </div>
-			)}
+			{
+				!forReport && !!onGoingConsultation ? (
+					<Row gutter={16} className="mt-2">
+						{onGoingConsultation &&
+							onGoingConsultation?.map((sched: any) => (
+								<Col span={12}>
+									<QueueManage schedule={sched} />
+								</Col>
+							))}
+					</Row>
+				) : (
+					<div> Loading... </div>
+				)}
+			
 		</div>
 	);
 };

@@ -76,9 +76,10 @@ export const createSchedule = (
 	}
 };
 
-export const getSchedules = (userType: string = "patient"): AppThunk => async (
-	dispatch
-) => {
+export const getSchedules = (
+	userType: string = "patient",
+	forReport: boolean = false
+): AppThunk => async (dispatch) => {
 	dispatch(scheduleLoading());
 	try {
 		let req;
@@ -89,7 +90,15 @@ export const getSchedules = (userType: string = "patient"): AppThunk => async (
 				).format("YYYY-MM-DD")}`
 			);
 		} else {
-			req = await axios.get("/schedules/?status=true");
+			if (forReport) {
+				req = await axios.get(
+					`/schedules/?status=true&consultationDate[lt]=${moment(
+						Date.now()
+					).format("YYYY-MM-DD")}&startStatus=Done`
+				);
+			} else {
+				req = await axios.get("/schedules/?status=true");
+			}
 		}
 		const res = await req.data;
 
