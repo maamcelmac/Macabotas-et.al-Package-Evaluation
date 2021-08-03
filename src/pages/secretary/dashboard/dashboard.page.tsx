@@ -6,12 +6,9 @@ import { getConsultedPatients } from "../../../redux/appointments/appointments.s
 import { getSchedules } from "../../../redux/schedules/schedule.slice";
 import { getPatients } from "../../../redux/patients/patients.slice";
 
-
 interface Props {
 	forReport: boolean;
-
 }
-
 
 const DasboardPage: React.FC<Props> = ({ forReport }) => {
 	const dispatch = useAppDispatch();
@@ -41,7 +38,7 @@ const DasboardPage: React.FC<Props> = ({ forReport }) => {
 
 	useEffect(() => {
 		dispatch(getConsultedPatients());
-		dispatch(getSchedules("patient"));
+		dispatch(getSchedules("admin", false));
 		dispatch(getPatients());
 	}, [dispatch]);
 	return (
@@ -160,20 +157,23 @@ const DasboardPage: React.FC<Props> = ({ forReport }) => {
 				</Col>
 			</Row>
 
-			{
-				!forReport && !!onGoingConsultation ? (
+			{!forReport ? (
+				!!onGoingConsultation ? (
 					<Row gutter={16} className="mt-2">
 						{onGoingConsultation &&
-							onGoingConsultation?.map((sched: any) => (
-								<Col span={12}>
-									<QueueManage schedule={sched} />
-								</Col>
-							))}
+							onGoingConsultation?.map((sched: any) => {
+								console.log(sched?.consultationDate);
+								return (
+									<Col span={12} className="mt-2">
+										<QueueManage schedule={sched} />
+									</Col>
+								);
+							})}
 					</Row>
 				) : (
 					<div> Loading... </div>
-				)}
-			
+				)
+			) : null}
 		</div>
 	);
 };

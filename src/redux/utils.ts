@@ -9,7 +9,7 @@ export const add = (items: any, itemToAdd: any) => {
 		return items;
 	}
 
-	return [...items, itemToAdd];
+	return [itemToAdd, ...items];
 };
 
 export const remove = (items: any, itemToRemove: any) => {

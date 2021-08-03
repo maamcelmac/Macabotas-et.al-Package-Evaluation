@@ -15,9 +15,15 @@ interface Props {
 	data: Schedule[];
 	userType?: string;
 	forReport?: boolean;
+	pagination?: boolean;
 }
 
-const ScheduleTable: React.FC<Props> = ({ data, userType, forReport }) => {
+const ScheduleTable: React.FC<Props> = ({
+	data,
+	userType,
+	forReport,
+	pagination,
+}) => {
 	const dispatch = useAppDispatch();
 	const history = useHistory();
 	const columns: ColumnsType<Schedule> = [
@@ -113,6 +119,7 @@ const ScheduleTable: React.FC<Props> = ({ data, userType, forReport }) => {
 								className="mr-half"
 								size="small"
 								onClick={() => {
+									console.log(row);
 									dispatch(setCurrent(row));
 								}}
 							>
@@ -165,7 +172,18 @@ const ScheduleTable: React.FC<Props> = ({ data, userType, forReport }) => {
 		});
 	}
 
-	return <Table<Schedule> rowKey="_id" dataSource={data} columns={columns} />;
+	return (
+		<Table<Schedule>
+			rowKey="_id"
+			dataSource={data}
+			columns={columns}
+			pagination={
+				pagination
+					? { position: ["bottomRight" as "bottomRight"] }
+					: false
+			}
+		/>
+	);
 };
 
 export default ScheduleTable;

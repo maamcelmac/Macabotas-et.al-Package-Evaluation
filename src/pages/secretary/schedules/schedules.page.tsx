@@ -15,7 +15,7 @@ const ConsulationsPage: React.FC = () => {
 	const schedules = useAppSelector((state) => state.schedules);
 	const [editState, setEditState] = useState<boolean>(false);
 	useEffect(() => {
-		dispatch(getSchedules());
+		dispatch(getSchedules("admin", false));
 		dispatch(getDoctors());
 		return () => {
 			dispatch(setCurrent(null));

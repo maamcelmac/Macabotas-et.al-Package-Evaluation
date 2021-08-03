@@ -10,12 +10,14 @@ interface Props {
 	data: Appointment[];
 	isDoctor?: boolean;
 	scheduleType?: string;
+	pagination?: boolean;
 }
 
 const AppointmentTable: React.FC<Props> = ({
 	data,
 	isDoctor = false,
 	scheduleType = "",
+	pagination = true,
 }) => {
 	const history = useHistory();
 
@@ -132,7 +134,16 @@ const AppointmentTable: React.FC<Props> = ({
 	}
 
 	return (
-		<Table<Appointment> rowKey="_id" dataSource={data} columns={columns} />
+		<Table<Appointment>
+			rowKey="_id"
+			dataSource={data}
+			columns={columns}
+			pagination={
+				pagination
+					? { position: ["bottomRight" as "bottomRight"] }
+					: false
+			}
+		/>
 	);
 };
 

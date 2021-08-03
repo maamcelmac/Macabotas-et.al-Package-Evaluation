@@ -16,6 +16,7 @@ import {
 	createSchedule,
 	setCurrent,
 	updateSchedule,
+	getSchedules,
 } from "../../../redux/schedules/schedule.slice";
 import { notify } from "../../global/alerts/alerts.component";
 import moment from "moment";
@@ -52,7 +53,7 @@ const CreateScheduleModal: React.FC<Props> = ({
 				type: editState && currentData?.type,
 				title: editState && currentData?.title,
 				description: editState && currentData?.description,
-				healthWorker: editState && currentData?.healthWorker,
+				healthWorker: editState && currentData?.healthWorker?._id,
 				numberOfSlot: editState && currentData?.numberOfSlot,
 				consultationDate:
 					editState &&
@@ -80,6 +81,7 @@ const CreateScheduleModal: React.FC<Props> = ({
 			if (val._id) {
 				dispatch(
 					updateSchedule(val._id, val, () => {
+						dispatch(getSchedules("admin", false));
 						notify("Schedule updated!", "success");
 						form.resetFields();
 						onCancel();
@@ -186,10 +188,7 @@ const CreateScheduleModal: React.FC<Props> = ({
 								Cancer Control and Prevention Program
 							</Option>
 
-							<Option value="Nutritionist">
-								{" "}
-								Nutritionist
-							</Option>
+							<Option value="Nutritionist"> Nutritionist</Option>
 						</Select>
 					</Form.Item>
 
@@ -227,8 +226,7 @@ const CreateScheduleModal: React.FC<Props> = ({
 							rules={[
 								{
 									required: true,
-									message:
-										"Please input health worker name!",
+									message: "Please input health worker name!",
 								},
 							]}
 						>
@@ -255,8 +253,7 @@ const CreateScheduleModal: React.FC<Props> = ({
 							rules={[
 								{
 									required: true,
-									message:
-										"Please input number of slots!",
+									message: "Please input number of slots!",
 								},
 							]}
 						>
@@ -272,8 +269,7 @@ const CreateScheduleModal: React.FC<Props> = ({
 							rules={[
 								{
 									required: true,
-									message:
-										"Please input consultation date!",
+									message: "Please input consultation date!",
 								},
 							]}
 						>
@@ -287,15 +283,11 @@ const CreateScheduleModal: React.FC<Props> = ({
 							rules={[
 								{
 									required: true,
-									message:
-										"Please input consultation time!",
+									message: "Please input consultation time!",
 								},
 							]}
 						>
-							<TimePicker
-								className="width-100"
-								format="HH:mm"
-							/>
+							<TimePicker className="width-100" format="HH:mm" />
 						</Form.Item>
 					</div>
 				</Form>

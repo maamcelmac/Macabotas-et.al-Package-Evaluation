@@ -45,7 +45,13 @@ export const ScheduleSlice = createSlice({
 		},
 		updateScheduleSuccess: (state, action) => {
 			state.loading = false;
-			state.schedules = update(state.schedules, action.payload);
+			// state.schedules = update(state.schedules, action.payload)?.sort(
+			// 	(data: any) => {
+			// 		console.log(data?.consultationDate);
+
+			// 		return 1;
+			// 	}
+			// );
 		},
 		setCurrentSchedule: (state, action) => {
 			state.current = action.payload;

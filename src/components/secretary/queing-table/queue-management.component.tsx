@@ -2,9 +2,12 @@ import React, { useState, useEffect } from "react";
 import { Card, Button } from "antd";
 import { Schedule } from "../../../types/Interfaces";
 import QueingTable from "./queing-table.component";
-import { updateSchedule } from "../../../redux/schedules/schedule.slice";
+import {
+	updateSchedule,
+	getSchedules,
+} from "../../../redux/schedules/schedule.slice";
 import { updateAppointment } from "../../../redux/appointments/appointments.slice";
-import { useAppDispatch } from "../../../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../../../redux/hooks";
 import { notify } from "../../global/alerts/alerts.component";
 import moment from "moment";
 import axios from "axios";
@@ -39,6 +42,9 @@ const AppointmentTable: React.FC<Props> = ({ schedule }) => {
 
 	const [appointments, setAppointments] = useState<any>([]);
 	const [currentAppointment, setCurrentAppointment] = useState<any>();
+	const consultationLoading: any = useAppSelector(
+		(state) => state?.schedules?.loading
+	);
 
 	useEffect(() => {
 		async function getPatients() {
@@ -47,15 +53,17 @@ const AppointmentTable: React.FC<Props> = ({ schedule }) => {
 				schedule?.title
 			);
 
-			const unfinishedPatients = data?.filter((item: any) => {
-				if (item?.queueNumber && schedule?.currentNumber) {
-					if (item?.queueNumber < schedule?.currentNumber) {
-						return true;
-					} else {
-						return false;
+			const unfinishedPatients = data
+				?.filter((item: any) => {
+					if (item?.queueNumber && schedule?.currentNumber) {
+						if (item?.queueNumber > schedule?.currentNumber) {
+							return true;
+						} else {
+							return false;
+						}
 					}
-				}
-			});
+				})
+				.sort((data: any) => -1);
 
 			const currentAppointment =
 				data &&
@@ -132,6 +140,10 @@ const AppointmentTable: React.FC<Props> = ({ schedule }) => {
 													)
 												);
 
+												dispatch(
+													getSchedules("admin", false)
+												);
+
 												notify(
 													"Consultation Successfully Ended!",
 													"success"
@@ -168,6 +180,9 @@ const AppointmentTable: React.FC<Props> = ({ schedule }) => {
 											},
 											() => {
 												dispatch(
+													getSchedules("admin", false)
+												);
+												dispatch(
 													updateAppointment(
 														currentAppointment?._id,
 														{
@@ -181,7 +196,7 @@ const AppointmentTable: React.FC<Props> = ({ schedule }) => {
 									);
 								} else {
 									notify(
-										"Error executing 'Next', Please refresh the page!",
+										"Error executing 'Next' due to no next number in Queue!",
 										"error"
 									);
 								}
