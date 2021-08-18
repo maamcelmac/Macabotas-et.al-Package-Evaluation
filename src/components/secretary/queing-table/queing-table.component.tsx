@@ -22,6 +22,10 @@ const AppointmentTable: React.FC<Props> = ({ data }) => {
 			dataIndex: "queueNumber",
 			key: "queueNumber",
 		},
+		{
+			title: "Phone #",
+			dataIndex: ["consultationForm", "phoneNumber"],
+		},
 	];
 
 	return (

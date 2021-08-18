@@ -12,8 +12,8 @@ import store from "./redux/store";
 import { loadableReady } from "@loadable/component";
 
 if (process.env.NODE_ENV === "development") {
-	axios.defaults.baseURL = "https://health-center-api.herokuapp.com/api";
-	// axios.defaults.baseURL = "http://localhost:5001/api/";
+	// axios.defaults.baseURL = "https://health-center-api.herokuapp.com/api";
+	axios.defaults.baseURL = "http://localhost:5001/api/";
 } else {
 	axios.defaults.baseURL = "https://health-center-api.herokuapp.com/api";
 }
