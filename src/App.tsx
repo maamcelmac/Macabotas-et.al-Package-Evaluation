@@ -27,7 +27,7 @@ const App: React.FC = () => {
 			<Suspense fallback={<Spinner />}>
 				<ErrorBoundary>
 					<Switch>
-						<Route path="/admin" component={SecretaryRoutes} />
+						{/* <Route path="/admin" component={SecretaryRoutes} />
 						<Route path="/login" component={LoginPage} />
 
 						<Route path="/patients" component={PatientsRoutes} />
@@ -42,7 +42,7 @@ const App: React.FC = () => {
 						<Route
 							path="/patient-registration"
 							component={PatientRegistrationPage}
-						/>
+						/> */}
 					</Switch>
 				</ErrorBoundary>
 			</Suspense>
